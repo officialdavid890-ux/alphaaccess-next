@@ -46,9 +46,9 @@ export default function Home() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
-        className="relative z-10 flex flex-col items-center justify-center px-6"
+        className="relative z-10 flex flex-col items-center justify-center px-6 max-w-4xl" // Increased max-width for image placement
       >
-        {/* H1 is confirmed centered, sized 4xl/6xl (reduced from original 5xl/7xl), and gold */}
+        {/* H1 is confirmed centered, sized 4xl/6xl, and gold */}
         <h1 className="text-4xl md:text-6xl font-extrabold text-gold-400 tracking-wider leading-tight">
           UNCHAIN THE CONTINENT
         </h1>
@@ -59,24 +59,63 @@ export default function Home() {
           The hunt for economic sovereignty has begun. <br />
           Welcome to the unified financial operating system for Africa.
         </p>
-
+        
+        {/* ENTER THE XCHANGE BUTTON - Continuous Blinking */}
         <motion.button
           onClick={handleEnter}
-          whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(255,215,0,0.5)" }}
-          whileTap={{ scale: 0.97 }}
+          // Continuous blinking animation
+          animate={{
+            scale: [1, 1.05, 1],
+            boxShadow: ["0px 0px 8px rgba(255,215,0,0.5)", "0px 0px 20px rgba(255,215,0,0.8)", "0px 0px 8px rgba(255,215,0,0.5)"]
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
           className="mt-12 px-10 py-3 rounded-full bg-gradient-to-r from-gold-400 to-gold-600 
                      text-black font-semibold text-lg tracking-wide 
-                     shadow-md transition-all duration-300"
+                     shadow-md transition-all duration-300 cursor-pointer"
         >
           ENTER THE XCHANGE
         </motion.button>
+        
+        {/* Attached Images Section - New Implementation */}
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.5 }}
+            className="flex justify-center space-x-10 mt-32 mb-8"
+        >
+            <Image 
+                src="/brain.png" 
+                alt="Golden Brain" 
+                width={80} 
+                height={80} 
+                className="object-contain" 
+            />
+            <Image 
+                src="/hourglass.png" 
+                alt="Golden Hourglass" 
+                width={80} 
+                height={80} 
+                className="object-contain" 
+            />
+            <Image 
+                src="/box.png" 
+                alt="Golden Box" 
+                width={80} 
+                height={80} 
+                className="object-contain" 
+            />
+        </motion.div>
 
-        {/* Signature line is bold and gold */}
+        {/* Signature line made bolder and gold */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 2.5, delay: 1 }}
-          className="mt-32 text-gold-400 text-base md:text-lg font-semibold italic tracking-wide"
+          transition={{ duration: 2.5, delay: 1.8 }}
+          className="text-gold-400 text-base md:text-lg font-semibold italic tracking-wide"
         >
           They built us a Circus. We built an Exit.
         </motion.p>
