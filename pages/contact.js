@@ -23,7 +23,7 @@ export default function Contact() {
 
         <div className="bg-slate border border-gold-800/40 rounded-2xl p-6 shadow-[0_0_20px_rgba(255,215,0,0.1)] space-y-6">
           
-          <h2 className className="text-xl font-semibold text-gold-400 border-b border-gold-900/50 pb-3">Connect Electronically</h2>
+          <h2 className="text-xl font-semibold text-gold-400 border-b border-gold-900/50 pb-3">Connect Electronically</h2>
 
           {/* Email 1: General Support */}
           <div className="flex flex-col items-center space-y-2">
@@ -36,7 +36,7 @@ export default function Contact() {
             <p className="text-xs text-gold-700">General Support & Inquiries</p>
           </div>
 
-          {/* Email 2: Strategic - THIS SECTION IS THE SOURCE OF THE ERROR. IT IS NOW CORRECTED. */}
+          {/* Email 2: Strategic - FIX APPLIED HERE */}
           <div className="flex flex-col items-center space-y-2 pt-4 border-t border-gold-900/50">
             <Mail size={24} className="text-gold-400" />
             <p className="text-gold-200 font-medium text-lg">
