@@ -12,13 +12,15 @@ export default function Layout({ children }) {
           alt="Africa Map"
           fill
           style={{ objectFit: "cover" }}
+          priority
         />
       </div>
 
       {/* Main layout */}
       <div className="relative z-10 flex flex-col min-h-screen">
         <TopBar />
-        <main className="flex-1 px-6 py-10">{children}</main>
+        {/* Adjusted padding to clear the fixed TopBar (pt-24) and BottomNav (pb-20) */}
+        <main className="flex-1 px-6 pt-24 pb-20">{children}</main>
         <BottomNav />
       </div>
     </div>
