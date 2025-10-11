@@ -84,4 +84,30 @@ export default function Wallet() {
               <motion.div
                 key={index}
                 whileHover={{ scale: 1.02 }}
-                className="flex justify-between items-center bg-black/60 b
+                className="flex justify-between items-center bg-black/60 border border-yellow-900/40
+                           rounded-xl px-4 py-3 backdrop-blur-sm"
+              >
+                <div>
+                  <p className="text-yellow-200 font-medium">{tx.type}</p>
+                  <span className="text-xs text-gray-500">{tx.date}</span>
+                </div>
+                <div className="text-right">
+                  <p className={`${tx.amount.startsWith('-') ? 'text-red-400' : 'text-green-400'} font-semibold`}>
+                    {tx.amount}
+                  </p>
+                  <span
+                    className={`text-xs uppercase tracking-wider ${
+                      tx.status === "completed" ? "text-gray-500" : "text-yellow-400"
+                    }`}
+                  >
+                    {tx.status}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+}
