@@ -1,10 +1,19 @@
-import "@/styles/globals.css";
-import { AnimatePresence } from "framer-motion";
+// pages/_app.js
+import "../styles/global.css";
+import { AnimatePresence, motion } from "framer-motion";
 
-export default function MyApp({ Component, pageProps }) {
+export default function App({ Component, pageProps, router }) {
   return (
     <AnimatePresence mode="wait">
-      <Component {...pageProps} />
+      <motion.div
+        key={router.route}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
+        <Component {...pageProps} />
+      </motion.div>
     </AnimatePresence>
   );
 }
