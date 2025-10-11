@@ -14,22 +14,24 @@ export default function HomeDashboard() {
 
   return (
     <div>
-      {/* Welcome Section */}
+      {/* Welcome Section - Centered and Lighter Text */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
+        className="text-center" // Centering the text block
       >
-        <h2 className="text-3xl font-bold text-gold-400 mb-2">
+        {/* Header is now gold and less bold (font-semibold vs font-bold) */}
+        <h2 className="text-3xl font-semibold text-gold-400 mb-2">
           Welcome to AlphaAccess Exchange
         </h2>
-        <p className="text-gray-400 max-w-xl leading-relaxed text-sm md:text-base">
-          Empowering Africa’s digital economy through real-time payments,
-          borderless wallets, and sovereign finance infrastructure.
+        {/* Supporting text is gold, centered, and lighter (font-light) */}
+        <p className="text-gold-300 max-w-xl mx-auto leading-relaxed text-sm md:text-base font-light">
+          Empowering Africa’s digital economy through real-time payments, borderless wallets, and sovereign finance infrastructure.
         </p>
       </motion.div>
 
-      {/* Quick Actions */}
+      {/* Quick Actions - No layout change needed, text already gold-themed */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-10">
         {actions.map((action, i) => (
           <motion.button
@@ -48,6 +50,7 @@ export default function HomeDashboard() {
 
       {/* Recent Transactions */}
       <div className="mt-12">
+        {/* Header changed to gold */}
         <h3 className="text-xl text-gold-400 mb-4 font-semibold">
           Recent Transactions
         </h3>
@@ -62,7 +65,8 @@ export default function HomeDashboard() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="border border-gold-700/30 bg-black/40 rounded-lg px-5 py-3 text-gray-300 text-sm backdrop-blur-sm"
+              // Ensure transaction text is also gold-toned
+              className="border border-gold-700/30 bg-black/40 rounded-lg px-5 py-3 text-gold-200 text-sm backdrop-blur-sm"
             >
               {txn}
             </motion.div>
