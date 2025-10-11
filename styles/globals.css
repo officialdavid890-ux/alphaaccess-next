@@ -1,10 +1,8 @@
-/* Ensure the first line is a valid CSS comment or directive */
+/* Fix: Replaced obsolete @import "tailwindcss/base" directives with the modern, single @import "tailwindcss", which fixes the "Package path ./base is not exported" error. */
 
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss"; 
 
-/* Import custom font from Google Fonts (Orbitron for Cyberpunk/Futuristic feel) */
+/* Import custom font from Google Fonts (Orbitron) */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap');
 
 html,
@@ -16,7 +14,7 @@ body {
   /* Set base dark theme */
   background-color: #000;
   color: #f0f0f0;
-  min-height: 100vh; /* Ensure body takes full height */
+  min-height: 100vh;
 }
 
 a {
@@ -26,11 +24,6 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-/* Base custom utility classes (if you prefer this method over configuring Tailwind directly) */
-.text-gold-400 {
-  color: #FFD700; /* Primary Gold */
 }
 
 /* Ensure global CSS for framer-motion is minimal and correct */
