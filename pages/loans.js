@@ -1,10 +1,23 @@
 // pages/loans.js
 
+import { useState } from "react";
 import Layout from "../components/Layout";
-import { motion } from "framer-motion";
-import { Wallet, TrendingUp, CreditCard, Clock, CheckCircle2, XCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Wallet,
+  TrendingUp,
+  CreditCard,
+  Clock,
+  CheckCircle2,
+  XCircle,
+  X,
+  SendHorizonal,
+} from "lucide-react";
 
 export default function Loans() {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedOffer, setSelectedOffer] = useState(null);
+
   const loans = [
     {
       title: "Personal Flex Loan",
@@ -52,9 +65,12 @@ export default function Loans() {
       <div className="space-y-12 fade-in">
         {/* Title */}
         <div className="text-center mt-2">
-          <h1 className="text-3xl font-bold text-yellow-400 tracking-wider">Loans & Credit</h1>
+          <h1 className="text-3xl font-bold text-yellow-400 tracking-wider">
+            Loans & Credit
+          </h1>
           <p className="text-gray-400 mt-2 text-sm">
-            View your active loans, explore new offers, and manage repayment with ease.
+            View your active loans, explore new offers, and manage repayment
+            with ease.
           </p>
         </div>
 
@@ -78,15 +94,25 @@ export default function Loans() {
                            }`}
               >
                 <div className="flex justify-between items-center mb-3">
-                  <h3 className="text-yellow-300 font-semibold text-lg">{loan.title}</h3>
-                  {loan.status === "active" && <Clock className="text-yellow-400" size={20} />}
-                  {loan.status === "completed" && <CheckCircle2 className="text-green-400" size={20} />}
-                  {loan.status === "pending" && <XCircle className="text-gray-400" size={20} />}
+                  <h3 className="text-yellow-300 font-semibold text-lg">
+                    {loan.title}
+                  </h3>
+                  {loan.status === "active" && (
+                    <Clock className="text-yellow-400" size={20} />
+                  )}
+                  {loan.status === "completed" && (
+                    <CheckCircle2 className="text-green-400" size={20} />
+                  )}
+                  {loan.status === "pending" && (
+                    <XCircle className="text-gray-400" size={20} />
+                  )}
                 </div>
-                <p className="text-yellow-200 text-xl font-bold mb-1">{loan.amount}</p>
+                <p className="text-yellow-200 text-xl font-bold mb-1">
+                  {loan.amount}
+                </p>
                 <p className="text-sm text-gray-400">
-                  Rate: <span className="text-yellow-300">{loan.rate}</span> | Term:{" "}
-                  <span className="text-yellow-300">{loan.term}</span>
+                  Rate: <span className="text-yellow-300">{loan.rate}</span> |
+                  Term: <span className="text-yellow-300">{loan.term}</span>
                 </p>
                 <p
                   className={`mt-3 text-xs uppercase font-semibold tracking-wider ${
@@ -106,7 +132,9 @@ export default function Loans() {
 
         {/* Loan Offers */}
         <div>
-          <h2 className="text-yellow-300 font-semibold mb-4">Available Loan Offers</h2>
+          <h2 className="text-yellow-300 font-semibold mb-4">
+            Available Loan Offers
+          </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {offers.map((offer, index) => (
               <motion.div
@@ -117,13 +145,19 @@ export default function Loans() {
               >
                 <div className="flex items-center gap-3 mb-3">
                   {offer.icon}
-                  <h3 className="text-yellow-200 font-semibold text-lg">{offer.title}</h3>
+                  <h3 className="text-yellow-200 font-semibold text-lg">
+                    {offer.title}
+                  </h3>
                 </div>
                 <p className="text-gray-400 text-sm mb-4">{offer.desc}</p>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   className="w-full py-2 rounded-xl bg-gradient-to-r from-yellow-700 to-yellow-600
                              text-black font-semibold shadow-lg"
+                  onClick={() => {
+                    setSelectedOffer(offer);
+                    setShowModal(true);
+                  }}
                 >
                   Apply Now
                 </motion.button>
@@ -134,7 +168,9 @@ export default function Loans() {
 
         {/* Repayment Summary */}
         <div>
-          <h2 className="text-yellow-300 font-semibold mb-4">Repayment Summary</h2>
+          <h2 className="text-yellow-300 font-semibold mb-4">
+            Repayment Summary
+          </h2>
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -159,6 +195,81 @@ export default function Loans() {
           </motion.div>
         </div>
       </div>
+
+      {/* 🪄 Apply Loan Modal */}
+      <AnimatePresence>
+        {showModal && (
+          <>
+            {/* Background Overlay */}
+            <motion.div
+              className="fixed inset-0 bg-black/80 backdrop-blur-md z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+            {/* Modal */}
+            <motion.div
+              className="fixed inset-0 flex items-center justify-center z-50 p-4"
+              initial={{ opacity: 0, scale: 0.95, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+            >
+              <div className="bg-gradient-to-b from-black/90 to-yellow-950/10 border border-yellow-800/40 rounded-2xl p-8 w-full max-w-md shadow-[0_0_30px_rgba(234,179,8,0.15)] relative">
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="absolute top-3 right-3 text-yellow-500 hover:text-yellow-300"
+                >
+                  <X size={20} />
+                </button>
+                <h2 className="text-yellow-300 text-xl font-semibold mb-2">
+                  Apply for {selectedOffer?.title}
+                </h2>
+                <p className="text-gray-400 text-sm mb-6">
+                  {selectedOffer?.desc}
+                </p>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-gray-400 text-sm">Loan Amount</label>
+                    <input
+                      type="number"
+                      placeholder="₦ Amount"
+                      className="w-full mt-1 bg-black/70 border border-yellow-700/40 text-yellow-100 rounded-xl p-2 focus:outline-none focus:ring-1 focus:ring-yellow-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-gray-400 text-sm">
+                      Repayment Period
+                    </label>
+                    <select className="w-full mt-1 bg-black/70 border border-yellow-700/40 text-yellow-100 rounded-xl p-2 focus:outline-none focus:ring-1 focus:ring-yellow-500">
+                      <option>3 months</option>
+                      <option>6 months</option>
+                      <option>12 months</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-gray-400 text-sm">Purpose</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Business expansion"
+                      className="w-full mt-1 bg-black/70 border border-yellow-700/40 text-yellow-100 rounded-xl p-2 focus:outline-none focus:ring-1 focus:ring-yellow-500"
+                    />
+                  </div>
+
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-yellow-700 to-yellow-600 text-black font-semibold mt-6"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Submit Application <SendHorizonal size={18} />
+                  </motion.button>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </Layout>
   );
 }
