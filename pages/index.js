@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 export default function Home() {
   const router = useRouter();
 
+  // This handles the redirect to the newly renamed file: pages/dashboard.js
   const handleEnter = () => {
     router.push("/dashboard");
   };
@@ -19,6 +20,7 @@ export default function Home() {
           width={70}
           height={70}
           className="object-contain"
+          priority
         />
       </div>
 
@@ -36,6 +38,7 @@ export default function Home() {
           objectFit="contain"
           quality={100}
           className="pointer-events-none select-none"
+          priority
         />
       </motion.div>
 
@@ -60,7 +63,7 @@ export default function Home() {
           onClick={handleEnter}
           whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(255,215,0,0.5)" }}
           whileTap={{ scale: 0.97 }}
-          className="mt-12 px-10 py-3 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-700 
+          className="mt-12 px-10 py-3 rounded-full bg-gradient-to-r from-gold-400 to-gold-600 
                      text-black font-semibold text-lg tracking-wide 
                      shadow-md transition-all duration-300"
         >
@@ -79,7 +82,7 @@ export default function Home() {
       </motion.div>
 
       {/* Subtle radial glow for luxury depth */}
-      <div className="absolute inset-0 bg-gradient-radial from-yellow-700/10 via-transparent to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-radial from-gold-700/10 via-transparent to-transparent"></div>
     </div>
   );
 }
