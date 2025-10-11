@@ -7,19 +7,20 @@ import {
   Wallet2,
   ArrowDownToLine,
   ArrowUpFromLine,
-  RefreshCcw,
   X,
   Repeat,
   Send,
   User,
+  Loader2,
+  CheckCircle2,
 } from "lucide-react";
-
-// ... (existing balances, actions, and transactions data remains the same)
 
 export default function Wallet() {
   const [showExchange, setShowExchange] = useState(false);
-  
-  // Use the new theme-friendly gold-scale colors
+  const [exchangeStep, setExchangeStep] = useState(1);
+  const [processing, setProcessing] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   const balances = [
     { title: "Local Currency Wallet", amount: "₦1,248,500.00", tag: "NGN" },
     { title: "USD / Stablecoin Wallet", amount: "$2,930.75", tag: "USD" },
@@ -30,10 +31,15 @@ export default function Wallet() {
     { name: "Deposit", icon: <ArrowDownToLine size={18} />, color: "from-green-700/40" },
     { name: "Withdraw", icon: <ArrowUpFromLine size={18} />, color: "from-red-700/40" },
     {
-      name: "Cross-Border", // Renamed for clarity in UI/UX
+      name: "Cross-Border",
       icon: <Send size={18} />,
       color: "from-gold-600/40",
-      onClick: () => setShowExchange(true),
+      onClick: () => {
+        setExchangeStep(1);
+        setSuccess(false);
+        setProcessing(false);
+        setShowExchange(true);
+      },
     },
   ];
 
@@ -44,10 +50,48 @@ export default function Wallet() {
     { type: "Deposit", amount: "₦500,000.00", date: "Oct 3, 2025", status: "pending" },
   ];
 
-  const [exchangeStep, setExchangeStep] = useState(1);
-  
+  const handleConfirmTransfer = () => {
+    setProcessing(true);
+    setTimeout(() => {
+      setProcessing(false);
+      setSuccess(true);
+      setTimeout(() => {
+        setShowExchange(false);
+        setExchangeStep(1);
+        setSuccess(false);
+      }, 3000);
+    }, 2500);
+  };
+
   // Custom Cross-Border Component
   const CrossBorderFlow = () => {
+    if (processing) {
+        return (
+            <div className="flex flex-col items-center justify-center py-10 space-y-4">
+                <Loader2 className="animate-spin text-gold-400" size={40} />
+                <p className="text-gold-300 text-sm tracking-wider uppercase">
+                Transfer Processing...
+                </p>
+            </div>
+        );
+    }
+
+    if (success) {
+        return (
+            <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex flex-col items-center justify-center py-10 space-y-4"
+            >
+                <CheckCircle2 className="text-green-400" size={45} />
+                <p className="text-green-300 text-xl tracking-wider font-semibold uppercase">
+                Transfer Complete!
+                </p>
+                <p className="text-sm text-gray-400 text-center">Recipient will receive KSh 65,000 instantly.</p>
+            </motion.div>
+        );
+    }
+
     switch (exchangeStep) {
       case 1:
         return (
@@ -60,7 +104,7 @@ export default function Wallet() {
               <option>United States ($)</option>
             </select>
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.03 }}
               onClick={() => setExchangeStep(2)}
               className="mt-6 w-full bg-gradient-to-r from-gold-600 to-gold-400 text-black font-bold py-3 rounded-xl shadow-lg"
             >
@@ -83,18 +127,21 @@ export default function Wallet() {
               className="w-full mt-2 bg-black/70 border border-gold-800/40 rounded-lg px-3 py-3 text-white focus:outline-none focus:ring-1 focus:ring-gold-400"
             />
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.03 }}
               onClick={() => setExchangeStep(3)}
               className="mt-6 w-full bg-gradient-to-r from-gold-600 to-gold-400 text-black font-bold py-3 rounded-xl shadow-lg"
             >
               Continue to Amount <User size={16} className="inline ml-2" />
             </motion.button>
+            <button onClick={() => setExchangeStep(1)} className="w-full text-sm text-gray-500 hover:text-white mt-2">
+                &lt; Back
+            </button>
           </div>
         );
       case 3:
         return (
           <div className="space-y-4">
-            <h2 className="text-xl font-bold text-gold-400 mb-4">Step 3: Confirm Payment</h2>
+            <h2 className="text-xl font-bold text-gold-400 mb-4">Step 3: Confirm Payment (Low Fee!)</h2>
             <div className="space-y-2 text-sm bg-black/40 p-4 rounded-lg border border-gold-800/40">
                 <p className="flex justify-between text-gray-300"><span>Sending From:</span> <span className="font-semibold">USD Wallet</span></p>
                 <p className="flex justify-between text-gray-300"><span>Sending To:</span> <span className="font-semibold">John Doe (Kenya)</span></p>
@@ -103,29 +150,16 @@ export default function Wallet() {
                 <p className="flex justify-between text-gold-400 font-bold border-t border-gold-800/50 pt-2 mt-2"><span>Recipient Gets:</span> <span className="text-xl">KSh 65,000</span></p>
             </div>
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              onClick={() => setExchangeStep(4)} // Final confirmation/status
+              whileHover={{ scale: 1.03 }}
+              onClick={handleConfirmTransfer}
               className="mt-6 w-full bg-gradient-to-r from-gold-600 to-gold-400 text-black font-bold py-3 rounded-xl shadow-lg"
             >
               Confirm Transfer <Repeat className="inline ml-2" size={16} />
             </motion.button>
-            <button onClick={() => setExchangeStep(1)} className="w-full text-sm text-gray-500 hover:text-white mt-2">
-                Start Over
+            <button onClick={() => setExchangeStep(2)} className="w-full text-sm text-gray-500 hover:text-white mt-2">
+                &lt; Back
             </button>
           </div>
-        );
-      case 4:
-        return (
-            <div className="flex flex-col items-center justify-center py-10 space-y-4">
-                <Loader2 className="animate-spin text-gold-400" size={40} />
-                <p className="text-gold-300 text-sm tracking-wider uppercase">
-                Transfer in Progress...
-                </p>
-                <p className="text-xs text-gray-500 text-center">Tracking ID: AX247833. Should complete in seconds.</p>
-                <button onClick={() => setShowExchange(false)} className="mt-4 text-xs text-gray-500 hover:text-white">
-                    Close
-                </button>
-            </div>
         );
       default:
         return <p>Error</p>;
@@ -135,8 +169,7 @@ export default function Wallet() {
 
   return (
     <Layout>
-        {/* ... (Existing main content remains the same) */}
-        <div className="space-y-12 fade-in">
+      <div className="space-y-12 fade-in">
         {/* Page Title */}
         <div className="text-center mt-2">
           <h1 className="text-3xl font-bold text-gold-400 tracking-wider">Wallet</h1>
@@ -220,7 +253,7 @@ export default function Wallet() {
         </div>
       </div>
 
-      {/* Exchange Modal */}
+      {/* Cross-Border Modal */}
       <AnimatePresence>
         {showExchange && (
           <motion.div
@@ -262,20 +295,3 @@ export default function Wallet() {
     </Layout>
   );
 }
-
-// Need to re-add Loader2 and other icons if they are not globally available
-// For this self-contained solution, I'll assume they are from lucide-react as in pages/loans.js
-// If you run into issues, ensure you import them in wallet.js
-/*
-import {
-  Wallet2,
-  ArrowDownToLine,
-  ArrowUpFromLine,
-  RefreshCcw,
-  X,
-  Repeat,
-  Send,
-  User,
-  Loader2, // Added Loader2 here for the CrossBorderFlow component
-} from "lucide-react";
-*/
