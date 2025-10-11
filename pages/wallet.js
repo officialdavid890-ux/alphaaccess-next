@@ -1,10 +1,20 @@
 // pages/wallet.js
 
 import Layout from "../components/Layout";
-import { motion } from "framer-motion";
-import { Wallet2, ArrowDownToLine, ArrowUpFromLine, RefreshCcw } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import {
+  Wallet2,
+  ArrowDownToLine,
+  ArrowUpFromLine,
+  RefreshCcw,
+  X,
+  Repeat,
+} from "lucide-react";
 
 export default function Wallet() {
+  const [showExchange, setShowExchange] = useState(false);
+
   const balances = [
     { title: "Local Currency Wallet", amount: "₦1,248,500.00", tag: "NGN" },
     { title: "USD / Stablecoin Wallet", amount: "$2,930.75", tag: "USD" },
@@ -14,7 +24,12 @@ export default function Wallet() {
   const actions = [
     { name: "Deposit", icon: <ArrowDownToLine size={18} />, color: "from-green-700/40" },
     { name: "Withdraw", icon: <ArrowUpFromLine size={18} />, color: "from-red-700/40" },
-    { name: "Exchange", icon: <RefreshCcw size={18} />, color: "from-yellow-700/40" },
+    {
+      name: "Exchange",
+      icon: <RefreshCcw size={18} />,
+      color: "from-yellow-700/40",
+      onClick: () => setShowExchange(true),
+    },
   ];
 
   const transactions = [
@@ -65,6 +80,7 @@ export default function Wallet() {
               <motion.button
                 key={index}
                 whileHover={{ scale: 1.05 }}
+                onClick={action.onClick}
                 className={`flex items-center gap-2 px-5 py-3 bg-gradient-to-r ${action.color} 
                             to-yellow-950/20 border border-yellow-800/40 rounded-xl text-yellow-200
                             font-medium shadow-[0_0_10px_rgba(234,179,8,0.2)]`}
@@ -108,6 +124,76 @@ export default function Wallet() {
           </div>
         </div>
       </div>
+
+      {/* Exchange Modal */}
+      <AnimatePresence>
+        {showExchange && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-md flex justify-center items-center z-50"
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="bg-black border border-yellow-800/50 rounded-2xl p-8 w-[90%] md:w-[450px]
+                         shadow-[0_0_40px_rgba(234,179,8,0.25)] text-center relative"
+            >
+              <button
+                onClick={() => setShowExchange(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-yellow-400"
+              >
+                <X size={20} />
+              </button>
+
+              <h2 className="text-2xl font-bold text-yellow-300 mb-6">Currency Exchange</h2>
+
+              <div className="space-y-4 text-left">
+                <div>
+                  <label className="text-gray-400 text-sm">From</label>
+                  <select className="w-full mt-1 bg-black border border-yellow-800/40 rounded-lg px-3 py-2 text-yellow-200 focus:outline-none">
+                    <option>NGN - Nigerian Naira</option>
+                    <option>USD - US Dollar</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="text-gray-400 text-sm">To</label>
+                  <select className="w-full mt-1 bg-black border border-yellow-800/40 rounded-lg px-3 py-2 text-yellow-200 focus:outline-none">
+                    <option>USD - US Dollar</option>
+                    <option>NGN - Nigerian Naira</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="text-gray-400 text-sm">Amount</label>
+                  <input
+                    type="number"
+                    placeholder="Enter amount"
+                    className="w-full mt-1 bg-black border border-yellow-800/40 rounded-lg px-3 py-2 text-yellow-200 focus:outline-none"
+                  />
+                </div>
+
+                <div className="text-sm text-gray-500 mt-3">
+                  <p>💱 1 USD = ₦1,485.00</p>
+                  <p>Fee: 0.3% (transparent rate)</p>
+                </div>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className="mt-6 w-full bg-gradient-to-r from-yellow-700 to-yellow-600 text-black font-bold py-3 rounded-xl shadow-lg"
+              >
+                <Repeat className="inline mr-2" size={16} />
+                Confirm Exchange
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Layout>
   );
 }
