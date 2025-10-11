@@ -1,28 +1,36 @@
+// components/TopBar.js
 import Image from "next/image";
+import Link from "next/link";
 
 export default function TopBar() {
   return (
-    <header className="flex justify-between items-center px-6 py-4 border-b border-yellow-600/20 bg-black/70 backdrop-blur-md shadow-md">
-      <div className="flex items-center gap-3">
-        <Image
-          src="/aax-logo.png"
-          alt="Alpha Access Xchange Logo"
-          width={48}
-          height={48}
-          className="object-contain"
-        />
-        <div>
-          <h1 className="text-xl text-yellow-400 tracking-widest font-bold">
+    <header className="fixed top-0 left-0 w-full bg-black/80 backdrop-blur-md border-b border-gray-800 z-50 flex items-center justify-between px-6 py-3">
+      {/* Logo on top-left corner */}
+      <Link href="/">
+        <div className="flex items-center space-x-3 cursor-pointer">
+          <Image
+            src="/logo.png"
+            alt="AlphaAccess Logo"
+            width={50}
+            height={50}
+            className="object-contain"
+            priority
+          />
+          <span className="text-lg font-bold tracking-wide text-white">
             AlphaAccess
-          </h1>
-          <p className="text-xs text-gray-400 uppercase">Consumer Mode</p>
+          </span>
         </div>
-      </div>
+      </Link>
 
-      <div className="text-right">
-        <p className="text-yellow-300 font-mono text-sm">₦124,300.00</p>
-        <p className="text-yellow-500/80 font-mono text-sm">$102.45</p>
-      </div>
+      {/* Optional navigation items on the right */}
+      <nav className="flex items-center space-x-6 text-sm text-gray-300">
+        <Link href="/about" className="hover:text-white transition">
+          About
+        </Link>
+        <Link href="/contact" className="hover:text-white transition">
+          Contact
+        </Link>
+      </nav>
     </header>
   );
 }
