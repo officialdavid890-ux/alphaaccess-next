@@ -6,21 +6,25 @@ export default function Home() {
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-black text-white">
-      {/* Glowing gold frame effect */}
-      <div className="absolute inset-0 bg-black">
-        <div className="absolute inset-0 ring-[200px] ring-yellow-500/10 blur-3xl"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-yellow-900/20 opacity-60"></div>
-      </div>
+      {/* Pulsing gold glow animation */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{ opacity: [0.4, 0.8, 0.4] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="absolute inset-0 ring-[250px] ring-yellow-500/20 blur-[120px]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-yellow-900/10 opacity-60"></div>
+      </motion.div>
 
-      {/* Central hero section */}
+      {/* Hero content */}
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 1.2 }}
         className="z-10 text-center"
       >
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-wide mb-6">
-          <span className="text-yellow-400 drop-shadow-[0_0_10px_#FFD700]">
+          <span className="text-yellow-400 drop-shadow-[0_0_12px_#FFD700]">
             UNCHAIN THE CONTINENT
           </span>
         </h1>
@@ -31,12 +35,15 @@ export default function Home() {
         </p>
 
         <motion.button
-          whileHover={{ scale: 1.05 }}
+          whileHover={{
+            scale: 1.05,
+            boxShadow: "0px 0px 20px 5px rgba(255, 215, 0, 0.4)",
+          }}
           whileTap={{ scale: 0.97 }}
           onClick={() => router.push("/app")}
           className="bg-gradient-to-r from-yellow-500 to-yellow-700 text-black font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-yellow-400/40 transition-all"
         >
-          ENTER THE EXCHANGE
+          ENTER THE XCHANGE
         </motion.button>
       </motion.div>
 
@@ -44,7 +51,7 @@ export default function Home() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
+        transition={{ delay: 1.2, duration: 1.2 }}
         className="absolute bottom-12 text-center z-10"
       >
         <p className="text-gray-400 bg-white/10 px-6 py-2 rounded-md text-sm font-semibold mb-6">
