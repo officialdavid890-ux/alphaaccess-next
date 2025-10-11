@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import Link from 'next/link';
 
-// --- Data for the Pillared Section ---
+// --- Data for the Pillared Section (Mapping to Brain, Hourglass, Box) ---
 const PillarsData = [
     { 
       title: "SMART FINANCE", 
@@ -43,9 +43,9 @@ export default function Home() {
   };
   
   return (
-    <div className="relative min-h-screen bg-black overflow-hidden text-center text-white font-[Orbitron]">
+    <div className="relative min-h-screen bg-black overflow-hidden font-[Orbitron] text-white">
       
-      {/* Absolute Header Links (Top-Right) - Retained from previous iterations */}
+      {/* Absolute Header Links (Top-Right) */}
       <header className="absolute top-0 left-0 w-full z-20 flex justify-end px-8 py-4">
         <nav className="flex space-x-6 text-sm font-semibold">
           <Link href="/how-it-works" className="text-gold-300 hover:text-gold-400 transition">How it Works</Link>
@@ -65,8 +65,8 @@ export default function Home() {
           priority
         />
       </div>
-
-      {/* --- Section 1: Hero & Map (Matches Top Section of the Image) --- */}
+      
+      {/* --- Section 1: Hero, Map, and Top CTAs (Matches Top Section of the Image) --- */}
       <div className="max-w-7xl mx-auto px-6 pt-24 pb-12 flex flex-col md:flex-row items-center justify-between relative z-10">
         
         {/* Left Column: Text and CTAs */}
@@ -89,7 +89,7 @@ export default function Home() {
             Alpha Access Exchange is Africa’s financial operating system — connecting people, traders, and institutions through a united, borderless economic network.
           </p>
 
-          {/* CTA Row */}
+          {/* CTA Row - Matches the two buttons side-by-side in the image */}
           <div className="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
             <motion.button
               onClick={handleEnter}
@@ -113,14 +113,14 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Right Column: Globe Image */}
+        {/* Right Column: Globe Image (Africa Map) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
           className="md:w-1/2 w-full flex justify-center md:justify-end mt-12 md:mt-0 relative"
         >
-          {/* Map image from the previous "watermark" is now the featured hero image */}
+          {/* Using the Africa map image as the hero visual */}
           <Image
             src="/africa-map.png"
             alt="Africa Digital Map"
@@ -135,7 +135,7 @@ export default function Home() {
       {/* --- Section 2: Core Philosophy & Pillars (Matches Middle Section) --- */}
       <div className="bg-black py-16 px-6 relative z-10 w-full">
         
-        {/* Philosophy */}
+        {/* Philosophy Header and Signature */}
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -160,7 +160,7 @@ export default function Home() {
                     transition={{ duration: 0.6, delay: 1.2 + index * 0.15 }}
                     className="flex flex-col items-center text-center md:w-1/4 w-full px-4 space-y-3"
                 >
-                    {/* Pillar Image (Reusing brain, hourglass, box) */}
+                    {/* Pillar Icon/Image */}
                     <Image 
                         src={pillar.image} 
                         alt={pillar.title} 
@@ -239,7 +239,7 @@ export default function Home() {
                     {/* Small Shield Image */}
                     <div className="hidden sm:block">
                         <Image 
-                            src="/shield.png" // Assuming shield.png is created from the template
+                            src="/shield.png" 
                             alt="Alpha Access Shield" 
                             width={60} 
                             height={60} 
@@ -257,7 +257,7 @@ export default function Home() {
             </motion.div>
         </div>
 
-      {/* Subtle radial glow ensures black background coverage */}
+      {/* Fallback for background consistency */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
     </div>
   );
