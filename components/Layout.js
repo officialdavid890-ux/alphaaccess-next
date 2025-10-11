@@ -1,5 +1,7 @@
+// components/Layout.js
 import TopBar from "./TopBar";
 import BottomNav from "./BottomNav";
+import Footer from "./Footer"; 
 import Image from "next/image";
 
 export default function Layout({ children }) {
@@ -26,6 +28,7 @@ export default function Layout({ children }) {
         {/* Adjusted padding to clear the fixed TopBar (pt-24) and BottomNav (pb-20) */}
         <main className="flex-1 px-6 pt-24 pb-20">{children}</main>
         <BottomNav />
+        <Footer />
       </div>
     </div>
   );
