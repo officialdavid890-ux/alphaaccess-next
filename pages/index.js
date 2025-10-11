@@ -23,10 +23,9 @@ export default function Home() {
         />
       </div>
 
-      {/* Africa Gold Watermark - Enhanced Glowing Effect */}
+      {/* Africa Gold Watermark - Enhanced Glowing Effect (No change from last update) */}
       <motion.div
         initial={{ opacity: 0 }}
-        // Increased opacity range and slightly faster pulse for a noticeable, continuous glow effect
         animate={{ opacity: [0.15, 0.25, 0.15] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="absolute inset-0 flex items-center justify-center"
@@ -42,19 +41,19 @@ export default function Home() {
         />
       </motion.div>
 
-      {/* Main Text Content */}
+      {/* Main Text Content - Centered */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
         className="relative z-10 flex flex-col items-center justify-center px-6"
       >
-        {/* H1 Reduced in Size (text-5xl/7xl -> text-4xl/6xl) and set to luxurious gold */}
+        {/* H1 is confirmed centered, sized 4xl/6xl (reduced from original 5xl/7xl), and gold */}
         <h1 className="text-4xl md:text-6xl font-extrabold text-gold-400 tracking-wider leading-tight">
           UNCHAIN THE CONTINENT
         </h1>
 
-        {/* Supporting text changed to rich gold for luxurious feel */}
+        {/* Supporting text is gold */}
         <p className="mt-8 text-gold-300 text-base md:text-lg leading-relaxed max-w-2xl font-light">
           The old circus is closed. <br />
           The hunt for economic sovereignty has begun. <br />
@@ -72,7 +71,7 @@ export default function Home() {
           ENTER THE XCHANGE
         </motion.button>
 
-        {/* Signature line made bolder and gold */}
+        {/* Signature line is bold and gold */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -83,7 +82,7 @@ export default function Home() {
         </motion.p>
       </motion.div>
 
-      {/* Subtle radial glow ensuring black background coverage */}
+      {/* Subtle radial glow ensures black background coverage */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
     </div>
   );
