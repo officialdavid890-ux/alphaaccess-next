@@ -4,8 +4,18 @@ import Layout from "../components/Layout";
 import { motion, AnimatePresence } from "framer-motion";
 import PartnerModal from "../components/PartnerModal";
 
-/* Services data (blend of fintech + lifestyle) - ADDED FLIGHTS, MAGAZINES, MORE */
+/* Services data (blend of fintech + lifestyle) - EXPANDED */
 const SERVICES = [
+  {
+    id: "flights",
+    title: "Flights",
+    subtitle: "Global & Intra-African travel booking",
+    detail:
+      "Seamlessly book flights across Africa and internationally. Exclusive discounts and priority check-in options available for AlphaAccess members.",
+    partnerUrl: "https://example.com/flights",
+    iconSVG:
+      `<svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M21 10c0-1.1-.9-2-2-2h-6l-2-5H7c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4l2 5h6c1.1 0 2-.9 2-2z" stroke="#FFD700" stroke-width="1.2"/><path d="M11 11h2v2h-2z" fill="#FFD700"/></svg>`,
+  },
   {
     id: "transport",
     title: "Transport",
@@ -17,14 +27,14 @@ const SERVICES = [
       `<svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="1" y="6" width="22" height="10" rx="2" stroke="#FFD700" stroke-width="1.2"/><circle cx="7" cy="17.5" r="1.6" fill="#FFD700"/><circle cx="17" cy="17.5" r="1.6" fill="#FFD700"/></svg>`,
   },
   {
-    id: "flights",
-    title: "Flights",
-    subtitle: "Global & Intra-African travel booking",
+    id: "magazines",
+    title: "Magazines/Media",
+    subtitle: "Premium digital subscriptions & content",
     detail:
-      "Seamlessly book flights across Africa and internationally. Exclusive discounts and priority check-in options available for AlphaAccess members.",
-    partnerUrl: "https://example.com/flights",
+      "Manage all your digital subscriptions in one place, from financial news to lifestyle magazines. Pay instantly with your AlphaAccess wallet.",
+    partnerUrl: "https://example.com/media",
     iconSVG:
-      `<svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M21 10c0-1.1-.9-2-2-2h-6l-2-5H7c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h4l2 5h6c1.1 0 2-.9 2-2z" stroke="#FFD700" stroke-width="1.2"/><path d="M11 11h2v2h-2z" fill="#FFD700"/></svg>`,
+      `<svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" stroke="#FFD700" stroke-width="1.2"/><path d="M8 6h8M8 10h8M8 14h6" stroke="#FFD700" stroke-width="1.2" stroke-linecap="round"/></svg>`,
   },
   {
     id: "food",
@@ -45,16 +55,6 @@ const SERVICES = [
     partnerUrl: "https://example.com/tickets",
     iconSVG:
       `<svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="2" stroke="#FFD700" stroke-width="1.2"/><path d="M7 6v12" stroke="#FFD700" stroke-width="1"/></svg>`,
-  },
-  {
-    id: "magazines",
-    title: "Magazines/Media",
-    subtitle: "Premium digital subscriptions & content",
-    detail:
-      "Manage all your digital subscriptions in one place, from financial news to lifestyle magazines. Pay instantly with your AlphaAccess wallet.",
-    partnerUrl: "https://example.com/media",
-    iconSVG:
-      `<svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" stroke="#FFD700" stroke-width="1.2"/><path d="M8 6h8M8 10h8M8 14h6" stroke="#FFD700" stroke-width="1.2" stroke-linecap="round"/></svg>`,
   },
   {
     id: "utilities",
@@ -88,7 +88,7 @@ const SERVICES = [
   },
   {
     id: "more",
-    title: "More Services",
+    title: "More Integrations",
     subtitle: "Investment APIs • Developer tools",
     detail:
       "Explore the deepest integration points, including our open APIs, developer documentation, and premium access services for institutional partners.",
@@ -128,19 +128,7 @@ export default function Discover() {
 
   return (
     <Layout>
-      {/* background particle layer (rest of layout handles full black background) */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        {/* subtle sweeping gold sheen */}
-        <svg className="w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden>
-          <defs>
-            <linearGradient id="gGold" x1="0" x2="1">
-              <stop offset="0" stopColor="#f2c94c" stopOpacity="0.03" />
-              <stop offset="1" stopColor="#ffd95b" stopOpacity="0.04" />
-            </linearGradient>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#gGold)" />
-        </svg>
-      </div>
+      {/* The layout already provides the black background and Africa map watermark */}
 
       <div className="relative z-10 max-w-7xl mx-auto py-10 px-4">
         <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="text-center mb-8">
@@ -169,7 +157,6 @@ export default function Discover() {
               >
                 <div className="flex items-start gap-4">
                   <div className="w-14 h-14 rounded-lg flex items-center justify-center bg-black/40 border border-gold-700/10">
-                    {/* Icon is already gold-themed via inline SVG color */}
                     <span className="text-gold-400" dangerouslySetInnerHTML={{ __html: s.iconSVG }} />
                   </div>
 
@@ -193,7 +180,7 @@ export default function Discover() {
         </motion.div>
       </div>
 
-      {/* Modal - Text within modal is handled by PartnerModal.js, assuming similar gold updates */}
+      {/* Modal - Displays details on click */}
       <AnimatePresence>
         {selected && <PartnerModal service={selected} onClose={() => setSelected(null)} />}
       </AnimatePresence>
