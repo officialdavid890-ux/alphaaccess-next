@@ -1,35 +1,27 @@
+import { Home, Wallet, Globe2, CreditCard, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { Home, Wallet, Search, CreditCard, MoreHorizontal } from "lucide-react";
+
+const navItems = [
+  { icon: <Home size={20} />, label: "Home", href: "/" },
+  { icon: <Wallet size={20} />, label: "Wallet", href: "/wallet" },
+  { icon: <Globe2 size={20} />, label: "Discover", href: "/discover" },
+  { icon: <CreditCard size={20} />, label: "Loans", href: "/loans" },
+  { icon: <MoreHorizontal size={20} />, label: "More", href: "/more" },
+];
 
 export default function BottomNav() {
-  const router = useRouter();
-
-  const navItems = [
-    { name: "Home", href: "/app", icon: Home },
-    { name: "Wallet", href: "/wallet", icon: Wallet },
-    { name: "Discover", href: "/discover", icon: Search },
-    { name: "Loans", href: "/loans", icon: CreditCard },
-    { name: "More", href: "/more", icon: MoreHorizontal },
-  ];
-
   return (
-    <nav className="flex justify-around items-center bg-slate py-3 border-t border-gold text-gold">
-      {navItems.map(({ name, href, icon: Icon }) => {
-        const isActive = router.pathname === href;
-        return (
-          <Link
-            key={name}
-            href={href}
-            className={`flex flex-col items-center text-xs transition ${
-              isActive ? "text-accent font-bold" : "text-gold hover:text-accent"
-            }`}
-          >
-            <Icon size={20} />
-            {name}
-          </Link>
-        );
-      })}
+    <nav className="fixed bottom-0 left-0 right-0 flex justify-around items-center py-3 border-t border-yellow-700/30 bg-black/70 backdrop-blur-xl">
+      {navItems.map(({ icon, label, href }) => (
+        <Link
+          href={href}
+          key={label}
+          className="flex flex-col items-center text-gray-400 hover:text-yellow-400 transition-all duration-200 hover:scale-110"
+        >
+          {icon}
+          <span className="text-xs mt-1">{label}</span>
+        </Link>
+      ))}
     </nav>
   );
 }
