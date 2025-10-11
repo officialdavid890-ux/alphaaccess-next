@@ -20,9 +20,8 @@ export default function TopBar() {
 
   return (
     <header className="fixed top-0 left-0 w-full bg-black/80 backdrop-blur-md border-b border-gold-800/50 z-50 flex items-center justify-between px-6 py-3">
-      {/* LEFT: Branding/Mode Indicator (AlphaAccess text removed) */}
+      {/* LEFT: Branding/Mode Indicator */}
       <div className="flex items-center space-x-3">
-        {/* AAX Logo now serves as the primary identifier */}
         <Link href="/dashboard" className="flex items-center space-x-3 cursor-pointer">
             <Image
               src="/aax-logo.png"
@@ -33,32 +32,36 @@ export default function TopBar() {
               priority
             />
         </Link>
-        {/* Mode Indicator remains */}
         <div className="flex flex-col text-sm">
+            {/* Rich Gold Text */}
             <span className="text-xs text-gold-400 uppercase font-semibold">
                 {isSmeMode ? 'SME Mode' : 'Consumer'}
             </span>
-            <span className="text-xs text-gray-500">
+            {/* Rich Gold Text */}
+            <span className="text-xs text-gold-300/70">
                 {isSmeMode ? 'Business Dashboard' : 'Personal Dashboard'}
             </span>
         </div>
       </div>
 
-      {/* MIDDLE: Balance/Wallet Info (All texts are rich gold/futuristic) */}
+      {/* MIDDLE: Balance/Wallet Info - All Rich Gold Text */}
       <div className="flex flex-col items-end text-sm">
+        {/* Rich Gold Text */}
         <span className="text-xs text-gold-300">
             {isSmeMode ? 'Business Balance' : 'Local Currency (₦)'}
         </span>
+        {/* Rich Gold Text */}
         <span className="text-lg font-bold text-gold-400">
           {isSmeMode ? '₦15,000,000' : '₦1,248,500'}
         </span>
-        <span className="text-xs text-gray-500">
+        {/* Rich Gold Text */}
+        <span className="text-xs text-gold-300/70">
           {isSmeMode ? 'USD Wallet: $30k' : 'USD Wallet: $2,930'}
         </span>
       </div>
 
-      {/* RIGHT: Quick Actions (All icons are gold/futuristic) */}
-      <div className="flex items-center space-x-4 text-gray-300">
+      {/* RIGHT: Quick Actions */}
+      <div className="flex items-center space-x-4 text-gold-300"> {/* Set default icon color to gold-300 */}
         <button className="hover:text-gold-400 transition">
           <Bell size={24} />
         </button>
