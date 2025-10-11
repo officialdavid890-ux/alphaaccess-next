@@ -5,7 +5,6 @@ import { Bell, User, Briefcase } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-// The TopBar component now includes the SME Toggle logic
 export default function TopBar() {
   const [isSmeMode, setIsSmeMode] = useState(false); // State for SME toggle
 
@@ -23,7 +22,7 @@ export default function TopBar() {
     <header className="fixed top-0 left-0 w-full bg-black/80 backdrop-blur-md border-b border-gold-800/50 z-50 flex items-center justify-between px-6 py-3">
       {/* LEFT: Branding/Mode Indicator */}
       <div className="flex items-center space-x-3">
-        {/* AAX Logo Placeholder (Using text due to logo path being relative to /public) */}
+        {/* AAX Logo Placeholder */}
         <Image
           src="/aax-logo.png"
           alt="Alpha Access Exchange Logo"
@@ -32,7 +31,7 @@ export default function TopBar() {
           className="object-contain"
           priority
         />
-        <div className="flex flex-col">
+        <div className="flex flex-col text-sm">
             <span className="text-xs text-gray-500 uppercase">
                 {isSmeMode ? 'SME Mode' : 'Consumer'}
             </span>
@@ -42,16 +41,16 @@ export default function TopBar() {
         </div>
       </div>
 
-      {/* MIDDLE: Balance/Wallet Info (Consumer Mode) or Business Name (SME Mode) */}
-      <div className="flex flex-col items-end">
-        <span className="text-sm text-gray-400">
-            {isSmeMode ? 'Business Wallet' : 'Local Currency'}
+      {/* MIDDLE: Balance/Wallet Info */}
+      <div className="flex flex-col items-end text-sm">
+        <span className="text-xs text-gray-400">
+            {isSmeMode ? 'Business Balance' : 'Local Currency (₦)'}
         </span>
-        <span className="text-xl font-bold text-gold-400">
+        <span className="text-lg font-bold text-gold-400">
           {isSmeMode ? '₦15,000,000' : '₦1,248,500'}
         </span>
         <span className="text-xs text-gray-500">
-          {isSmeMode ? '$30,000.00 USD' : '$2,930.75 USD'}
+          {isSmeMode ? 'USD Wallet: $30k' : 'USD Wallet: $2,930'}
         </span>
       </div>
 
