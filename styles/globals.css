@@ -1,19 +1,39 @@
-// pages/_app.js
-import "../styles/globals.css"; // FIXED: Changed 'global.css' to 'globals.css'
-import { AnimatePresence, motion } from "framer-motion";
+/* Ensure the first line is a valid CSS comment or directive */
 
-export default function App({ Component, pageProps, router }) {
-  return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={router.route}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <Component {...pageProps} />
-      </motion.div>
-    </AnimatePresence>
-  );
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Import custom font from Google Fonts (Orbitron for Cyberpunk/Futuristic feel) */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap');
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  /* Use the Orbitron font */
+  font-family: 'Orbitron', sans-serif; 
+  /* Set base dark theme */
+  background-color: #000;
+  color: #f0f0f0;
+  min-height: 100vh; /* Ensure body takes full height */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Base custom utility classes (if you prefer this method over configuring Tailwind directly) */
+.text-gold-400 {
+  color: #FFD700; /* Primary Gold */
+}
+
+/* Ensure global CSS for framer-motion is minimal and correct */
+.fade-in {
+  opacity: 1;
 }
