@@ -28,6 +28,7 @@ export default function Home() {
   };
 
   return (
+    // Set background to pure black
     <div className="relative min-h-screen bg-black flex flex-col items-center justify-center overflow-hidden text-center">
       
       {/* Absolute Header/Top Links - Retained for consistency */}
@@ -81,7 +82,7 @@ export default function Home() {
           UNCHAIN THE CONTINENT
         </h1>
 
-        {/* New Explainer Paragraph */}
+        {/* Explainer Paragraph */}
         <p className="mt-6 text-gold-300 text-md leading-relaxed max-w-2xl mx-auto font-light">
           Alpha Access Exchange is a unified financial operating system built for Africa. Trade assets, earn yield, control your finances, all on a platform designed for sovereignty, security, and inclusivity.
         </p>
@@ -114,8 +115,6 @@ export default function Home() {
             >
               START ACCESSING YOUR SOVEREIGNTY
             </motion.button>
-
-            {/* REMOVED: Secondary CTA Button ("Learn How It Works") */}
         </div>
 
         {/* Trust Signals */}
@@ -158,6 +157,17 @@ export default function Home() {
         >
           They built us a Circus. We built an Exit.
         </motion.p>
+        
+        {/* NEW: Explainer text under signature */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 2.5, delay: 2.0 }}
+          className="text-gold-300 text-sm md:text-base font-light max-w-xl mx-auto mt-4"
+        >
+          We're redefining value for a connected Africa where digital finance, investment, and innovation converge. Alpha Access empowers users to hold, trade, earn and invest- all within one sovereign ecosystem.
+        </motion.p>
+
       </motion.div>
 
       {/* Subtle radial glow ensures black background coverage */}
