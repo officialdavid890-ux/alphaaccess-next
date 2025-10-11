@@ -39,7 +39,8 @@ export default function Contact() {
           {/* Email 2: Strategic */}
           <div className="flex flex-col items-center space-y-2 pt-4 border-t border-gold-900/50">
             <Mail size={24} className="text-gold-400" />
-            <p className className="text-gold-200 font-medium text-lg">
+            {/* FIX: Removed duplicate 'className' prop */}
+            <p className="text-gold-200 font-medium text-lg">
               <a href="mailto:alpha@alphaaccess.exchange" className="hover:text-gold-400 transition underline-offset-4">
                 alpha@alphaaccess.exchange
               </a>
