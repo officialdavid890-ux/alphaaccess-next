@@ -5,14 +5,13 @@ import { useRouter } from "next/router";
 export default function Home() {
   const router = useRouter();
 
-  // This handles the redirect to the newly renamed file: pages/dashboard.js
   const handleEnter = () => {
     router.push("/dashboard");
   };
 
   return (
     <div className="relative min-h-screen bg-black flex flex-col items-center justify-center overflow-hidden text-center">
-      {/* Top-left logo */}
+      {/* Top-left logo (No change to position/size) */}
       <div className="absolute top-6 left-8 z-20">
         <Image
           src="/aax-logo.png"
@@ -24,11 +23,12 @@ export default function Home() {
         />
       </div>
 
-      {/* Africa Gold Watermark - animated softly */}
+      {/* Africa Gold Watermark - Enhanced Glowing Effect */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: [0.05, 0.12, 0.05] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        // Increased opacity range and slightly faster pulse for a noticeable, continuous glow effect
+        animate={{ opacity: [0.15, 0.25, 0.15] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="absolute inset-0 flex items-center justify-center"
       >
         <Image
@@ -49,11 +49,13 @@ export default function Home() {
         transition={{ duration: 1.5, ease: "easeOut" }}
         className="relative z-10 flex flex-col items-center justify-center px-6"
       >
-        <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-wider leading-tight">
+        {/* H1 Reduced in Size (text-5xl/7xl -> text-4xl/6xl) and set to luxurious gold */}
+        <h1 className="text-4xl md:text-6xl font-extrabold text-gold-400 tracking-wider leading-tight">
           UNCHAIN THE CONTINENT
         </h1>
 
-        <p className="mt-8 text-gray-300 text-base md:text-lg leading-relaxed max-w-2xl font-light">
+        {/* Supporting text changed to rich gold for luxurious feel */}
+        <p className="mt-8 text-gold-300 text-base md:text-lg leading-relaxed max-w-2xl font-light">
           The old circus is closed. <br />
           The hunt for economic sovereignty has begun. <br />
           Welcome to the unified financial operating system for Africa.
@@ -70,19 +72,19 @@ export default function Home() {
           ENTER THE XCHANGE
         </motion.button>
 
-        {/* Signature line below everything */}
+        {/* Signature line made bolder and gold */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 2.5, delay: 1 }}
-          className="mt-32 text-gray-400 text-sm md:text-base font-medium italic tracking-wide"
+          className="mt-32 text-gold-400 text-base md:text-lg font-semibold italic tracking-wide"
         >
           They built us a Circus. We built an Exit.
         </motion.p>
       </motion.div>
 
-      {/* Subtle radial glow for luxury depth */}
-      <div className="absolute inset-0 bg-gradient-radial from-gold-700/10 via-transparent to-transparent"></div>
+      {/* Subtle radial glow ensuring black background coverage */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
     </div>
   );
 }
