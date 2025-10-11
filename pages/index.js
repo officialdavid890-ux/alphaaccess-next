@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen bg-black flex flex-col items-center justify-center overflow-hidden text-center">
       
-      {/* Absolute Header/Top Links */}
+      {/* Absolute Header/Top Links - Retained for consistency */}
       <header className="absolute top-0 left-0 w-full z-20 flex justify-end px-8 py-4">
         <nav className="flex space-x-6 text-sm font-semibold">
           <Link href="/how-it-works" className="text-gold-300 hover:text-gold-400 transition">How it Works</Link>
@@ -97,7 +97,7 @@ export default function Home() {
             ))}
         </div>
 
-        {/* CTA Section (Primary + Secondary) */}
+        {/* CTA Section (Only Primary Button Remains) */}
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
              {/* Primary CTA Button */}
             <motion.button
@@ -115,19 +115,7 @@ export default function Home() {
               START ACCESSING YOUR SOVEREIGNTY
             </motion.button>
 
-            {/* Secondary CTA Button: Learn How It Works */}
-            <Link href="/how-it-works" passHref legacyBehavior>
-                <motion.a
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                    whileHover={{ scale: 1.05 }}
-                    className="px-12 py-4 rounded-full bg-black border border-gold-400 text-gold-400 
-                               font-semibold text-lg hover:bg-gold-900/50 transition duration-300 flex items-center justify-center"
-                >
-                    Learn How It Works
-                </motion.a>
-            </Link>
+            {/* REMOVED: Secondary CTA Button ("Learn How It Works") */}
         </div>
 
         {/* Trust Signals */}
