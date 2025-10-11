@@ -4,14 +4,18 @@ import Image from "next/image";
 
 export default function Layout({ children }) {
   return (
+    // Enforcing black background for the entire mobile frame
     <div className="relative min-h-screen bg-black text-gray-100 overflow-hidden font-[Orbitron]">
-      {/* Subtle Africa watermark */}
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
+      {/* Subtle Africa watermark for inner pages */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none z-0">
+        {/* Secondary black enforcement layer over the base background */}
+        <div className="absolute inset-0 bg-black/95" /> 
+        {/* Map Watermark - Low opacity watermark for all dashboard screens */}
         <Image
           src="/africa-map.png"
           alt="Africa Map"
           fill
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: "cover", opacity: 0.05 }}
           priority
         />
       </div>
