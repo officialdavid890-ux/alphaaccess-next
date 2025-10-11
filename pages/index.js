@@ -1,53 +1,62 @@
-"use client";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import Image from "next/image";
-import hero from "@/public/ALPHA ACCESS XCHANGE OFFICIAL.png";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  const [entered, setEntered] = useState(false);
+  const router = useRouter();
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-black text-gold">
-      {!entered ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
-          className="flex flex-col items-center justify-center h-full text-center"
-        >
-          <Image
-            src={hero}
-            alt="AlphaAccess Logo"
-            width={400}
-            height={400}
-            className="animate-pulse"
-          />
-          <h1 className="text-3xl md:text-5xl font-bold mt-6 tracking-widest">
+    <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-black text-white">
+      {/* Glowing gold frame effect */}
+      <div className="absolute inset-0 bg-black">
+        <div className="absolute inset-0 ring-[200px] ring-yellow-500/10 blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-yellow-900/20 opacity-60"></div>
+      </div>
+
+      {/* Central hero section */}
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="z-10 text-center"
+      >
+        <h1 className="text-5xl md:text-6xl font-extrabold tracking-wide mb-6">
+          <span className="text-yellow-400 drop-shadow-[0_0_10px_#FFD700]">
             UNCHAIN THE CONTINENT
-          </h1>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setEntered(true)}
-            className="mt-10 px-8 py-3 bg-gold text-black font-semibold rounded-full hover:bg-yellow-400 transition"
-          >
-            ENTER THE EXCHANGE
-          </motion.button>
-        </motion.div>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          </span>
+        </h1>
+
+        <p className="text-gray-300 max-w-xl mx-auto mb-10 text-lg leading-relaxed">
+          The old circus is closed. The hunt for economic sovereignty has begun. <br />
+          Welcome to the unified financial operating system for Africa.
+        </p>
+
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.97 }}
+          onClick={() => router.push("/app")}
+          className="bg-gradient-to-r from-yellow-500 to-yellow-700 text-black font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-yellow-400/40 transition-all"
         >
-          <iframe
-            src="/app"
-            className="w-full h-screen border-none"
-            title="AlphaAccess Dashboard"
-          />
-        </motion.div>
-      )}
+          ENTER THE EXCHANGE
+        </motion.button>
+      </motion.div>
+
+      {/* Footer tagline */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="absolute bottom-12 text-center z-10"
+      >
+        <p className="text-gray-400 bg-white/10 px-6 py-2 rounded-md text-sm font-semibold mb-6">
+          They Built us a Circus. We Built an Exit.
+        </p>
+
+        <div className="flex justify-center space-x-10 text-yellow-500 text-4xl">
+          <span>🧠</span>
+          <span>⏳</span>
+          <span>🌍</span>
+        </div>
+      </motion.div>
     </div>
   );
 }
