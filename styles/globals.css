@@ -2,17 +2,88 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Google Font – Orbitron for that futuristic digital look */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap');
+
+/* Global Styles */
+html,
 body {
+  padding: 0;
+  margin: 0;
   background-color: #000;
-  color: #d4af37;
-  font-family: 'Inter', sans-serif;
+  color: #f1f1f1;
+  font-family: 'Orbitron', sans-serif;
+  scroll-behavior: smooth;
 }
 
-@keyframes goldenPulse {
-  0%, 100% { filter: drop-shadow(0 0 10px #d4af37); }
-  50% { filter: drop-shadow(0 0 25px #ffd700); }
+/* Custom scrollbar (luxurious, minimal) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #b8860b, #facc15);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #111;
 }
 
-.animate-pulse {
-  animation: goldenPulse 3s infinite;
+/* Buttons */
+button {
+  transition: all 0.3s ease-in-out;
+}
+button:hover {
+  filter: brightness(1.2);
+}
+
+/* Gold Text Gradient (for future use) */
+.text-gold {
+  background: linear-gradient(90deg, #facc15, #d4af37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Cinematic fade animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+/* Watermark positioning */
+.bg-watermark {
+  background-image: url("/africa-map.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+/* Heading & paragraph tweaks */
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: 0.05em;
+  color: #facc15;
+}
+
+p {
+  color: #d1d1d1;
+  line-height: 1.7;
+}
+
+/* Futuristic gold glow */
+.glow {
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3);
 }
