@@ -21,10 +21,10 @@ export default function BottomNav() {
           <Link
             href={href}
             key={label}
-            className="flex flex-col items-center text-gray-400 transition-all duration-200"
+            className="flex flex-col items-center transition-all duration-200"
           >
             {/* Active Icon in Rich Gold (gold-400) */}
-            <Icon size={22} className={isActive ? "text-gold-400" : "text-gray-400 hover:text-gold-600"} />
+            <Icon size={22} className={isActive ? "text-gold-400" : "text-gold-300/70 hover:text-gold-600"} />
             {/* Label text in Rich Gold (gold-400) when active, Subtle Gold (gold-300) when inactive */}
             <span className={`text-xs mt-1 ${isActive ? "text-gold-400 font-semibold" : "text-gold-300/70"}`}>{label}</span>
           </Link>
