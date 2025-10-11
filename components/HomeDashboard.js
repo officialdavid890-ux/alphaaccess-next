@@ -21,7 +21,7 @@ export default function HomeDashboard() {
         transition={{ duration: 0.8 }}
         className="text-center" // Centering the text block
       >
-        {/* Header is now gold and less bold (font-semibold vs font-bold) */}
+        {/* Header is now gold and less bold (font-semibold) */}
         <h2 className="text-3xl font-semibold text-gold-400 mb-2">
           Welcome to AlphaAccess Exchange
         </h2>
@@ -31,7 +31,7 @@ export default function HomeDashboard() {
         </p>
       </motion.div>
 
-      {/* Quick Actions - No layout change needed, text already gold-themed */}
+      {/* Quick Actions - All text must be gold-themed for consistency */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-10">
         {actions.map((action, i) => (
           <motion.button
@@ -39,6 +39,7 @@ export default function HomeDashboard() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2 }}
+            // Text color is explicitly rich gold
             className="bg-gradient-to-b from-gold-800/10 to-transparent border border-gold-600/40 
                        text-gold-300 rounded-xl py-4 text-sm font-semibold tracking-wider
                        shadow-[0_0_10px_rgba(255,215,0,0.15)] hover:shadow-[0_0_20px_rgba(255,215,0,0.4)]"
@@ -65,8 +66,8 @@ export default function HomeDashboard() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.1 }}
-              // Ensure transaction text is also gold-toned
-              className="border border-gold-700/30 bg-black/40 rounded-lg px-5 py-3 text-gold-200 text-sm backdrop-blur-sm"
+              // Transaction list text is also gold
+              className="border border-gold-700/30 bg-black/40 rounded-lg px-5 py-3 text-gold-300 text-sm backdrop-blur-sm"
             >
               {txn}
             </motion.div>
