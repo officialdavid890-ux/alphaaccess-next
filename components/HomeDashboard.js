@@ -57,9 +57,9 @@ export default function HomeDashboard() {
         </h3>
         <div className="space-y-3">
           {[
-            "Sent ₦5,000 to Adewale",
-            "Received ₦10,000 from Tunde",
-            "Paid ₦2,500 for Electricity Bill",
+            "Sent ₦500,000 to Samuel Achiatyo", // UPDATED
+            "Received ₦100,000 from Adesua Obetoh", // UPDATED
+            "Paid ₦2,500 for Electricity Bill", // Original retained
           ].map((txn, i) => (
             <motion.div
               key={txn}
@@ -67,7 +67,7 @@ export default function HomeDashboard() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.1 }}
               // Transaction list text is also gold
-              className="border border-gold-700/30 bg-black/40 rounded-lg px-5 py-3 text-gold-300 text-sm backdrop-blur-sm"
+              className="border border-gold-700/30 bg-black/40 rounded-lg px-5 py-3 text-gold-200 text-sm backdrop-blur-sm"
             >
               {txn}
             </motion.div>
