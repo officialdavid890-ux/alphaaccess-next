@@ -20,30 +20,33 @@ export default function TopBar() {
 
   return (
     <header className="fixed top-0 left-0 w-full bg-black/80 backdrop-blur-md border-b border-gold-800/50 z-50 flex items-center justify-between px-6 py-3">
-      {/* LEFT: Branding/Mode Indicator */}
+      {/* LEFT: Branding/Mode Indicator (AlphaAccess text removed) */}
       <div className="flex items-center space-x-3">
-        {/* AAX Logo Placeholder */}
-        <Image
-          src="/aax-logo.png"
-          alt="Alpha Access Exchange Logo"
-          width={40}
-          height={40}
-          className="object-contain"
-          priority
-        />
+        {/* AAX Logo now serves as the primary identifier */}
+        <Link href="/dashboard" className="flex items-center space-x-3 cursor-pointer">
+            <Image
+              src="/aax-logo.png"
+              alt="Alpha Access Exchange Logo"
+              width={40}
+              height={40}
+              className="object-contain"
+              priority
+            />
+        </Link>
+        {/* Mode Indicator remains */}
         <div className="flex flex-col text-sm">
-            <span className="text-xs text-gray-500 uppercase">
+            <span className="text-xs text-gold-400 uppercase font-semibold">
                 {isSmeMode ? 'SME Mode' : 'Consumer'}
             </span>
-            <span className="text-md font-bold tracking-wide text-white">
-                AlphaAccess
+            <span className="text-xs text-gray-500">
+                {isSmeMode ? 'Business Dashboard' : 'Personal Dashboard'}
             </span>
         </div>
       </div>
 
-      {/* MIDDLE: Balance/Wallet Info */}
+      {/* MIDDLE: Balance/Wallet Info (All texts are rich gold/futuristic) */}
       <div className="flex flex-col items-end text-sm">
-        <span className="text-xs text-gray-400">
+        <span className="text-xs text-gold-300">
             {isSmeMode ? 'Business Balance' : 'Local Currency (₦)'}
         </span>
         <span className="text-lg font-bold text-gold-400">
@@ -54,13 +57,13 @@ export default function TopBar() {
         </span>
       </div>
 
-      {/* RIGHT: Quick Actions (Notifications, Profile/SME Toggle) */}
+      {/* RIGHT: Quick Actions (All icons are gold/futuristic) */}
       <div className="flex items-center space-x-4 text-gray-300">
         <button className="hover:text-gold-400 transition">
           <Bell size={24} />
         </button>
 
-        {/* SME Toggle Button */}
+        {/* SME Toggle Button (Gold-themed) */}
         <motion.button
           onClick={toggleSmeMode}
           whileHover={{ scale: 1.1, rotate: 5 }}
