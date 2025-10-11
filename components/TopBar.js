@@ -6,7 +6,7 @@ export default function TopBar() {
       <div className="flex items-center gap-3">
         <Image
           src="/aax-logo.png"
-          alt="AlphaAccess Logo"
+          alt="Alpha Access Xchange Logo"
           width={48}
           height={48}
           className="object-contain"
