@@ -2,105 +2,86 @@
 
 import Layout from "../components/Layout";
 import { motion } from "framer-motion";
-import { ArrowDownCircle, ArrowUpCircle, RefreshCcw } from "lucide-react";
+import { Wallet2, ArrowDownToLine, ArrowUpFromLine, RefreshCcw } from "lucide-react";
 
 export default function Wallet() {
   const balances = [
-    { name: "Local Currency Wallet", amount: "₦124,300.00" },
-    { name: "USD / Stablecoin Wallet", amount: "$102.45" },
-    { name: "Savings & Investments", amount: "₦820,000.00" },
+    { title: "Local Currency Wallet", amount: "₦1,248,500.00", tag: "NGN" },
+    { title: "USD / Stablecoin Wallet", amount: "$2,930.75", tag: "USD" },
+    { title: "Savings & Investments", amount: "₦5,000,000.00", tag: "Portfolio" },
+  ];
+
+  const actions = [
+    { name: "Deposit", icon: <ArrowDownToLine size={18} />, color: "from-green-700/40" },
+    { name: "Withdraw", icon: <ArrowUpFromLine size={18} />, color: "from-red-700/40" },
+    { name: "Exchange", icon: <RefreshCcw size={18} />, color: "from-yellow-700/40" },
   ];
 
   const transactions = [
-    { type: "Deposit", amount: "₦20,000", status: "Completed" },
-    { type: "Withdraw", amount: "₦10,000", status: "Pending" },
-    { type: "Swap", amount: "$50 → ₦63,000", status: "Completed" },
+    { type: "Received", amount: "+₦150,000.00", date: "Oct 8, 2025", status: "completed" },
+    { type: "Sent", amount: "-₦45,000.00", date: "Oct 7, 2025", status: "completed" },
+    { type: "Exchange", amount: "$100 → ₦148,500.00", date: "Oct 5, 2025", status: "completed" },
+    { type: "Deposit", amount: "₦500,000.00", date: "Oct 3, 2025", status: "pending" },
   ];
 
   return (
     <Layout>
-      <div className="space-y-10 fade-in">
-        {/* Title */}
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-yellow-400 tracking-widest">
-            My Wallet
-          </h1>
-          <p className="text-gray-400 text-sm mt-1">
-            Manage all your balances and transactions
+      <div className="space-y-12 fade-in">
+        {/* Page Title */}
+        <div className="text-center mt-2">
+          <h1 className="text-3xl font-bold text-yellow-400 tracking-wider">Wallet</h1>
+          <p className="text-gray-400 mt-2 text-sm">
+            Manage your balances, currencies, and savings securely.
           </p>
         </div>
 
-        {/* Balances Section */}
+        {/* Balance Cards */}
         <div className="grid md:grid-cols-3 gap-6">
-          {balances.map((wallet, i) => (
+          {balances.map((wallet, index) => (
             <motion.div
-              key={wallet.name}
-              initial={{ opacity: 0, y: 15 }}
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="p-6 rounded-2xl border border-yellow-700/30 bg-gradient-to-b from-yellow-900/10 to-transparent
-                         backdrop-blur-lg shadow-[0_0_20px_rgba(234,179,8,0.15)] hover:shadow-[0_0_25px_rgba(234,179,8,0.35)]
-                         transition-all duration-300"
+              transition={{ delay: index * 0.1 }}
+              className="rounded-2xl border border-yellow-800/40 bg-gradient-to-b from-black/70 to-yellow-950/10
+                         backdrop-blur-lg shadow-[0_0_25px_rgba(234,179,8,0.15)] hover:shadow-[0_0_35px_rgba(234,179,8,0.3)]
+                         p-5 transition-all duration-300"
             >
-              <h3 className="text-lg font-semibold text-yellow-300 mb-2">
-                {wallet.name}
-              </h3>
-              <p className="text-2xl font-bold text-yellow-400">{wallet.amount}</p>
+              <div className="flex justify-between items-start mb-4">
+                <h3 className="text-yellow-300 font-semibold text-lg">{wallet.title}</h3>
+                <Wallet2 className="text-yellow-400" size={22} />
+              </div>
+              <p className="text-2xl font-bold text-yellow-200">{wallet.amount}</p>
+              <span className="text-xs uppercase text-gray-500 tracking-wider">{wallet.tag}</span>
             </motion.div>
           ))}
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex justify-center flex-wrap gap-6 mt-6">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2 bg-yellow-600 text-black font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-yellow-500"
-          >
-            <ArrowDownCircle size={20} /> Deposit
-          </motion.button>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2 bg-yellow-600 text-black font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-yellow-500"
-          >
-            <ArrowUpCircle size={20} /> Withdraw
-          </motion.button>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2 bg-yellow-600 text-black font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-yellow-500"
-          >
-            <RefreshCcw size={20} /> Exchange
-          </motion.button>
-        </div>
-
-        {/* Transaction History */}
-        <div className="mt-10">
-          <h2 className="text-xl text-yellow-400 font-semibold mb-4 text-center">
-            Transaction History
-          </h2>
-          <div className="space-y-4 max-w-2xl mx-auto">
-            {transactions.map((txn, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -15 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="border border-yellow-800/40 bg-black/50 backdrop-blur-md px-5 py-4 rounded-xl flex justify-between items-center"
+        {/* Quick Actions */}
+        <div>
+          <h2 className="text-yellow-300 font-semibold mb-3">Quick Actions</h2>
+          <div className="flex flex-wrap gap-4">
+            {actions.map((action, index) => (
+              <motion.button
+                key={index}
+                whileHover={{ scale: 1.05 }}
+                className={`flex items-center gap-2 px-5 py-3 bg-gradient-to-r ${action.color} 
+                            to-yellow-950/20 border border-yellow-800/40 rounded-xl text-yellow-200
+                            font-medium shadow-[0_0_10px_rgba(234,179,8,0.2)]`}
               >
-                <div>
-                  <p className="text-yellow-300 font-semibold">{txn.type}</p>
-                  <p className="text-gray-400 text-sm">{txn.status}</p>
-                </div>
-                <p className="text-yellow-400 font-bold">{txn.amount}</p>
-              </motion.div>
+                {action.icon}
+                {action.name}
+              </motion.button>
             ))}
           </div>
         </div>
-      </div>
-    </Layout>
-  );
-}
+
+        {/* Transaction History */}
+        <div>
+          <h2 className="text-yellow-300 font-semibold mb-3">Transaction History</h2>
+          <div className="space-y-3">
+            {transactions.map((tx, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.02 }}
+                className="flex justify-between items-center bg-black/60 b
