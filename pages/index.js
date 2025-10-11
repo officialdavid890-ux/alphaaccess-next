@@ -2,36 +2,50 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import Link from 'next/link';
-import { Lock, Repeat2, Zap, DollarSign } from 'lucide-react';
 
-// Key feature data structure with icons
-const KeyFeatures = [
-    { title: "Secure Wallet", subtitle: "Bank-grade encryption, sovereign control.", icon: Lock },
-    { title: "Cross-Border Access", subtitle: "Send & receive instantly across Africa.", icon: Repeat2 },
-    { title: "Earn Yield & Low Fees", subtitle: "Transparent, minimal fees. Earn passive yield.", icon: Zap },
-    { title: "Trade Assets", subtitle: "Trade peer-to-peer with local currency.", icon: DollarSign },
+// --- Data for the Pillared Section ---
+const PillarsData = [
+    { 
+      title: "SMART FINANCE", 
+      detail: "Your AI powered wallets for instant payments, yield.", 
+      image: "/brain.png" 
+    },
+    { 
+      title: "TIME AS WEALTH", 
+      detail: "Access yield opportunities that grow while you rest.", 
+      image: "/hourglass.png" 
+    },
+    { 
+      title: "OPEN VAULT", 
+      detail: "Trade, invest, and manage your assets securely.", 
+      image: "/box.png" 
+    },
 ];
 
-// Image Caption Data for tooltip/accessibility
-const ImageCaptions = {
-    '/brain.png': "Sovereignty",
-    '/hourglass.png': "Instant Value",
-    '/box.png': "Secure Wealth",
-};
+// --- Component ---
 
 export default function Home() {
   const router = useRouter();
 
   const handleEnter = () => {
-    // Primary CTA: Directs user to the signup preview flow (Progressive Disclosure)
+    // Primary CTA: Directs user to the signup preview flow
     router.push("/signup-preview");
   };
+  
+  const handleLearnMore = () => {
+    // Secondary CTA: Directs user to the How It Works page
+    router.push("/how-it-works");
+  };
 
+  const handleCreateAccount = () => {
+    // Footer CTA: Directs user to the signup preview flow
+    router.push("/signup-preview");
+  };
+  
   return (
-    // Set background to pure black
-    <div className="relative min-h-screen bg-black flex flex-col items-center justify-center overflow-hidden text-center">
+    <div className="relative min-h-screen bg-black overflow-hidden text-center text-white font-[Orbitron]">
       
-      {/* Absolute Header/Top Links - Retained for consistency */}
+      {/* Absolute Header Links (Top-Right) - Retained from previous iterations */}
       <header className="absolute top-0 left-0 w-full z-20 flex justify-end px-8 py-4">
         <nav className="flex space-x-6 text-sm font-semibold">
           <Link href="/how-it-works" className="text-gold-300 hover:text-gold-400 transition">How it Works</Link>
@@ -40,7 +54,7 @@ export default function Home() {
         </nav>
       </header>
 
-      {/* Top-left logo (Positioning retained) */}
+      {/* Top-left logo (Retained) */}
       <div className="absolute top-6 left-8 z-20">
         <Image
           src="/aax-logo.png"
@@ -52,55 +66,31 @@ export default function Home() {
         />
       </div>
 
-      {/* Africa Gold Watermark - Continuous Glowing Effect */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: [0.15, 0.25, 0.15] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute inset-0 flex items-center justify-center"
-      >
-        <Image
-          src="/africa-map.png"
-          alt="Africa Gold Watermark"
-          layout="fill"
-          objectFit="contain"
-          quality={100}
-          className="pointer-events-none select-none"
-          priority
-        />
-      </motion.div>
-
-      {/* Main Content (Above the fold) */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="relative z-10 flex flex-col items-center justify-center px-6 max-w-4xl pt-24"
-      >
+      {/* --- Section 1: Hero & Map (Matches Top Section of the Image) --- */}
+      <div className="max-w-7xl mx-auto px-6 pt-24 pb-12 flex flex-col md:flex-row items-center justify-between relative z-10">
         
-        <h1 className="text-4xl md:text-6xl font-extrabold text-gold-400 tracking-wider leading-tight">
-          UNCHAIN THE CONTINENT
-        </h1>
+        {/* Left Column: Text and CTAs */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="md:text-left text-center md:w-1/2 w-full space-y-6"
+        >
+          {/* Main Headline */}
+          <h1 className="text-5xl md:text-7xl font-extrabold text-gold-400 tracking-wider leading-tight">
+            UNCHAIN THE CONTINENT.
+          </h1>
 
-        {/* Explainer Paragraph */}
-        <p className="mt-6 text-gold-300 text-md leading-relaxed max-w-2xl mx-auto font-light">
-          Alpha Access Exchange is a unified financial operating system built for Africa. Trade assets, earn yield, control your finances, all on a platform designed for sovereignty, security, and inclusivity.
-        </p>
+          {/* Subheader and Mission */}
+          <p className="text-xl font-bold text-white">
+            Bank. Invest. Build. Together.
+          </p>
+          <p className="text-gold-300/80 max-w-lg md:mx-0 mx-auto leading-relaxed font-light">
+            Alpha Access Exchange is Africa’s financial operating system — connecting people, traders, and institutions through a united, borderless economic network.
+          </p>
 
-        {/* Feature Icons Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 my-10 w-full max-w-3xl">
-            {KeyFeatures.map((feature, i) => (
-                <div key={i} className="flex flex-col items-center space-y-2 text-gold-300">
-                    <feature.icon size={36} className="text-gold-400" />
-                    <p className="font-semibold text-sm text-gold-200">{feature.title}</p>
-                    <p className="text-xs text-gold-700 hidden sm:block">{feature.subtitle}</p>
-                </div>
-            ))}
-        </div>
-
-        {/* CTA Section (Only Primary Button Remains) */}
-        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-             {/* Primary CTA Button */}
+          {/* CTA Row */}
+          <div className="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
             <motion.button
               onClick={handleEnter}
               animate={{
@@ -110,65 +100,162 @@ export default function Home() {
               transition={{ duration: 2.0, repeat: Infinity, ease: "easeInOut" }}
               whileHover={{ scale: 1.05, boxShadow: "0px 0px 30px rgba(255,215,0,0.9)" }}
               whileTap={{ scale: 0.95 }}
-              className="px-12 py-4 rounded-full bg-gradient-to-r from-gold-400 to-gold-600 
-                         text-black font-extrabold text-lg tracking-wide shadow-md transition-all duration-100"
+              className="px-8 py-3 rounded-md bg-gold-400 text-black font-extrabold text-lg tracking-wide shadow-md"
             >
-              START ACCESSING YOUR SOVEREIGNTY
+              ENTER THE XCHANGE
             </motion.button>
-        </div>
-
-        {/* Trust Signals */}
-        <p className="mt-8 text-gold-700 text-sm font-semibold">
-            Join 15,000+ Africans already using Alpha Access. | $50M+ secured assets.
-        </p>
-
-        {/* Product Images & Captions Section */}
-        <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.5 }}
-            className="flex justify-center space-x-10 mt-24 mb-8"
-        >
-            {['/brain.png', '/hourglass.png', '/box.png'].map((src) => (
-                <div key={src} className="relative group">
-                    <Image 
-                        src={src} 
-                        alt={ImageCaptions[src]} 
-                        width={80} 
-                        height={80} 
-                        className="object-contain" 
-                        priority
-                    />
-                    {/* Caption/Tooltip */}
-                    <span className="absolute bottom-[-20px] left-1/2 transform -translate-x-1/2 
-                                     text-xs font-medium text-gold-400 opacity-80 group-hover:opacity-100 transition duration-300">
-                        {ImageCaptions[src]}
-                    </span>
-                </div>
-            ))}
+            <button
+              onClick={handleLearnMore}
+              className="px-8 py-3 rounded-md border border-gold-400 text-gold-400 font-semibold hover:bg-gold-900/50 transition duration-300"
+            >
+              LEARN HOW IT WORKS
+            </button>
+          </div>
         </motion.div>
 
-        {/* Signature line - Bold and rich gold text */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 2.5, delay: 1.8 }}
-          className="text-gold-400 text-base md:text-lg font-semibold italic tracking-wide mt-8"
+        {/* Right Column: Globe Image */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="md:w-1/2 w-full flex justify-center md:justify-end mt-12 md:mt-0 relative"
         >
-          They built us a Circus. We built an Exit.
-        </motion.p>
-        
-        {/* NEW: Explainer text under signature */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 2.5, delay: 2.0 }}
-          className="text-gold-300 text-sm md:text-base font-light max-w-xl mx-auto mt-4"
-        >
-          We're redefining value for a connected Africa where digital finance, investment, and innovation converge. Alpha Access empowers users to hold, trade, earn and invest- all within one sovereign ecosystem.
-        </motion.p>
+          {/* Map image from the previous "watermark" is now the featured hero image */}
+          <Image
+            src="/africa-map.png"
+            alt="Africa Digital Map"
+            width={450} 
+            height={450} 
+            priority
+            className="opacity-75"
+          />
+        </motion.div>
+      </div>
 
-      </motion.div>
+      {/* --- Section 2: Core Philosophy & Pillars (Matches Middle Section) --- */}
+      <div className="bg-black py-16 px-6 relative z-10 w-full">
+        
+        {/* Philosophy */}
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+            className="text-center max-w-4xl mx-auto mb-12 space-y-4"
+        >
+            <h2 className="text-4xl font-extrabold text-white">
+                They built the circus. <span className="text-gold-400">We built the exit.</span>
+            </h2>
+            <p className="text-gold-300/90 text-md max-w-3xl mx-auto font-light">
+                We're redefining value for a connected Africa where digital finance, investment, and innovation converge. Alpha Access empowers users to hold, trade, earn and invest—all within one sovereign ecosystem.
+            </p>
+        </motion.div>
+        
+        {/* Pillars/Features Grid */}
+        <div className="flex flex-wrap justify-center space-y-8 md:space-y-0 md:space-x-10 max-w-5xl mx-auto">
+            {PillarsData.map((pillar, index) => (
+                <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 1.2 + index * 0.15 }}
+                    className="flex flex-col items-center text-center md:w-1/4 w-full px-4 space-y-3"
+                >
+                    {/* Pillar Image (Reusing brain, hourglass, box) */}
+                    <Image 
+                        src={pillar.image} 
+                        alt={pillar.title} 
+                        width={60} 
+                        height={60} 
+                        className="object-contain" 
+                    />
+                    <h3 className="text-xl font-bold text-gold-400 tracking-wider mt-4">{pillar.title}</h3>
+                    <p className="text-gold-300/80 text-sm">{pillar.detail}</p>
+                </motion.div>
+            ))}
+        </div>
+      </div>
+      
+      {/* --- Section 3: Network & Footer CTA (Matches Bottom Section) --- */}
+      <div className="py-16 px-6 relative z-10 w-full bg-slate">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left space-y-12 md:space-y-0">
+          
+            {/* Left Column: Network Mission */}
+            <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7 }}
+                className="md:w-3/5 space-y-4"
+            >
+                <h2 className="text-4xl font-extrabold text-gold-400">
+                    A network built for everyone — <br className="hidden md:block"/> from Lagos to Nairobi, Accra to Cairo.
+                </h2>
+                <p className="text-gold-300/80 text-lg font-light max-w-xl">
+                    Trade, send and invest seamlessly, regardless of borders or currencies.
+                </p>
+                <button
+                    onClick={() => router.push("/dashboard")}
+                    className="mt-4 px-8 py-3 rounded-md bg-gold-600 text-black font-semibold hover:bg-gold-400 transition duration-300"
+                >
+                    EXPLORE THE ECOSYSTEM
+                </button>
+            </motion.div>
+            
+            {/* Right Column: Map Silhouette */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 0.4, scale: 1 }}
+                transition={{ duration: 1 }}
+                className="md:w-2/5 flex justify-center relative opacity-40"
+            >
+                 <Image
+                    src="/africa-map.png"
+                    alt="Africa Silhouette"
+                    width={250} 
+                    height={250} 
+                    className="object-contain"
+                />
+            </motion.div>
+        </div>
+      </div>
+      
+      {/* --- Section 4: Final CTA (Shield Section) --- */}
+       <div className="bg-black py-20 px-6 relative z-10 w-full border-t border-gold-900">
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+                className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
+            >
+                <div className="text-center md:text-left space-y-2">
+                    <h2 className="text-3xl font-extrabold text-white">
+                        The Future of African Finance is Ours to Build.
+                    </h2>
+                    <p className="text-gold-700 font-semibold">
+                        Thousands already building sovereignty through Alpha Access.
+                    </p>
+                </div>
+                
+                <div className="flex items-center space-x-6">
+                    {/* Small Shield Image */}
+                    <div className="hidden sm:block">
+                        <Image 
+                            src="/shield.png" // Assuming shield.png is created from the template
+                            alt="Alpha Access Shield" 
+                            width={60} 
+                            height={60} 
+                            className="opacity-80" 
+                        />
+                    </div>
+                    
+                    <button
+                        onClick={handleCreateAccount}
+                        className="px-10 py-4 rounded-md bg-gold-400 text-black font-extrabold hover:bg-gold-600 transition duration-300"
+                    >
+                        CREATE YOUR ACCOUNT
+                    </button>
+                </div>
+            </motion.div>
+        </div>
 
       {/* Subtle radial glow ensures black background coverage */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
