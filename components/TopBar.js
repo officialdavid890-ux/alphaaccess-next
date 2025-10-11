@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 export default function TopBar() {
-  const [isSmeMode, setIsSmeMode] = useState(false); // State for SME toggle
+  const [isSmeMode, setIsSmeMode] = useState(false); 
 
   const toggleSmeMode = () => {
     setIsSmeMode(!isSmeMode);
@@ -33,35 +33,30 @@ export default function TopBar() {
             />
         </Link>
         <div className="flex flex-col text-sm">
-            {/* Rich Gold Text */}
             <span className="text-xs text-gold-400 uppercase font-semibold">
                 {isSmeMode ? 'SME Mode' : 'Consumer'}
             </span>
-            {/* Rich Gold Text */}
-            <span className="text-xs text-gold-300/70">
+            <span className="text-xs text-gold-700">
                 {isSmeMode ? 'Business Dashboard' : 'Personal Dashboard'}
             </span>
         </div>
       </div>
 
-      {/* MIDDLE: Balance/Wallet Info - All Rich Gold Text */}
+      {/* MIDDLE: Balance/Wallet Info - All Rich Gold Text (Simplified Display) */}
       <div className="flex flex-col items-end text-sm">
-        {/* Rich Gold Text */}
         <span className="text-xs text-gold-300">
-            {isSmeMode ? 'Business Balance' : 'Local Currency (₦)'}
+            Total Balance (USD)
         </span>
-        {/* Rich Gold Text */}
         <span className="text-lg font-bold text-gold-400">
-          {isSmeMode ? '₦15,000,000' : '₦1,248,500'}
+          {isSmeMode ? '$30,000.00' : '$4,179.25'}
         </span>
-        {/* Rich Gold Text */}
-        <span className="text-xs text-gold-300/70">
-          {isSmeMode ? 'USD Wallet: $30k' : 'USD Wallet: $2,930'}
+        <span className="text-xs text-gold-700">
+          Local: {isSmeMode ? '₦15M' : '₦1.2M'}
         </span>
       </div>
 
       {/* RIGHT: Quick Actions */}
-      <div className="flex items-center space-x-4 text-gold-300"> {/* Set default icon color to gold-300 */}
+      <div className="flex items-center space-x-4 text-gold-300">
         <button className="hover:text-gold-400 transition">
           <Bell size={24} />
         </button>
