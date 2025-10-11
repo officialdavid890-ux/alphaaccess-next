@@ -1,68 +1,52 @@
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 
 export default function Home() {
   const router = useRouter();
 
-  return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-black text-white">
-      {/* Pulsing gold glow animation */}
-      <motion.div
-        className="absolute inset-0"
-        animate={{ opacity: [0.4, 0.8, 0.4] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <div className="absolute inset-0 ring-[250px] ring-yellow-500/20 blur-[120px]"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-yellow-900/10 opacity-60"></div>
-      </motion.div>
+  const handleEnter = () => {
+    router.push("/dashboard"); // You can change this later
+  };
 
-      {/* Hero content */}
+  return (
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-black overflow-hidden">
+      {/* Gold Africa Watermark */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-10">
+        <Image
+          src="/africa-map.png" // make sure this is in your /public folder
+          alt="Africa Gold Map"
+          layout="fill"
+          objectFit="contain"
+          quality={100}
+        />
+      </div>
+
+      {/* Centered Content */}
       <motion.div
-        initial={{ opacity: 0, y: 25 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2 }}
-        className="z-10 text-center"
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="relative z-10 text-center px-4"
       >
-        <h1 className="text-5xl md:text-6xl font-extrabold tracking-wide mb-6">
-          <span className="text-yellow-400 drop-shadow-[0_0_12px_#FFD700]">
-            UNCHAIN THE CONTINENT
-          </span>
+        <h1 className="text-4xl md:text-6xl font-bold text-white tracking-wide">
+          UNCHAIN THE CONTINENT.
         </h1>
 
-        <p className="text-gray-300 max-w-xl mx-auto mb-10 text-lg leading-relaxed">
-          The old circus is closed. The hunt for economic sovereignty has begun. <br />
+        <p className="mt-6 text-gray-300 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+          The old circus is closed. <br />
+          The hunt for economic sovereignty has begun. <br />
           Welcome to the unified financial operating system for Africa.
         </p>
 
         <motion.button
-          whileHover={{
-            scale: 1.05,
-            boxShadow: "0px 0px 20px 5px rgba(255, 215, 0, 0.4)",
-          }}
-          whileTap={{ scale: 0.97 }}
-          onClick={() => router.push("/app")}
-          className="bg-gradient-to-r from-yellow-500 to-yellow-700 text-black font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-yellow-400/40 transition-all"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleEnter}
+          className="mt-10 px-8 py-3 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-700 text-black font-semibold shadow-lg hover:shadow-yellow-500/40 transition-all"
         >
           ENTER THE XCHANGE
         </motion.button>
-      </motion.div>
-
-      {/* Footer tagline */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1.2 }}
-        className="absolute bottom-12 text-center z-10"
-      >
-        <p className="text-gray-400 bg-white/10 px-6 py-2 rounded-md text-sm font-semibold mb-6">
-          They Built us a Circus. We Built an Exit.
-        </p>
-
-        <div className="flex justify-center space-x-10 text-yellow-500 text-4xl">
-          <span>🧠</span>
-          <span>⏳</span>
-          <span>🌍</span>
-        </div>
       </motion.div>
     </div>
   );
