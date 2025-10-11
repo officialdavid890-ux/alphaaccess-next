@@ -1,5 +1,5 @@
 // pages/_app.js
-import "../styles/global.css"; // ✅ correct path
+import "../styles/globals.css"; // <-- CRITICAL: Must be 'globals' with an 's'
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function App({ Component, pageProps, router }) {
