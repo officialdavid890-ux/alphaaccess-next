@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-// --- Data for the Pillared Section (Mapping to Brain, Hourglass, Box) ---
+// --- Data for the Pillared Section (Brain, Hourglass, Box icons) ---
 const PillarsData = [
   { 
     title: "SMART FINANCE", 
@@ -22,41 +22,26 @@ const PillarsData = [
   },
 ];
 
-// --- Component ---
 export default function Home() {
   const router = useRouter();
 
-  const handleEnter = () => {
-    router.push("/signup-preview");
-  };
-
-  const handleLearnMore = () => {
-    router.push("/how-it-works");
-  };
-
-  const handleCreateAccount = () => {
-    router.push("/signup-preview");
-  };
+  const handleEnter = () => router.push("/signup-preview");
+  const handleLearnMore = () => router.push("/how-it-works");
+  const handleCreateAccount = () => router.push("/signup-preview");
 
   return (
     <div className="relative min-h-screen bg-black overflow-hidden font-[Orbitron] text-white">
 
-      {/* Header Links */}
+      {/* --- Header Links (Top Right) --- */}
       <header className="absolute top-0 left-0 w-full z-20 flex justify-end px-8 py-4">
         <nav className="flex space-x-6 text-sm font-semibold">
-          <Link href="/how-it-works" className="text-gold-300 hover:text-gold-400 transition">
-            How it Works
-          </Link>
-          <Link href="/security" className="text-gold-300 hover:text-gold-400 transition">
-            Security
-          </Link>
-          <Link href="/support" className="text-gold-300 hover:text-gold-400 transition">
-            Support
-          </Link>
+          <Link href="/how-it-works" className="text-gold-300 hover:text-gold-400 transition">How it Works</Link>
+          <Link href="/security" className="text-gold-300 hover:text-gold-400 transition">Security</Link>
+          <Link href="/support" className="text-gold-300 hover:text-gold-400 transition">Support</Link>
         </nav>
       </header>
 
-      {/* Logo */}
+      {/* --- Logo (Top Left) --- */}
       <div className="absolute top-6 left-8 z-20">
         <Image
           src="/aax-logo.png"
@@ -68,8 +53,10 @@ export default function Home() {
         />
       </div>
 
-      {/* Hero Section */}
+      {/* --- HERO SECTION --- */}
       <div className="max-w-7xl mx-auto px-6 pt-24 pb-12 flex flex-col md:flex-row items-center justify-between relative z-10">
+        
+        {/* Left Text */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -79,12 +66,12 @@ export default function Home() {
           <h1 className="text-5xl md:text-7xl font-extrabold text-gold-400 tracking-wider leading-tight">
             UNCHAIN THE CONTINENT.
           </h1>
-
           <p className="text-xl font-bold text-white">Bank. Invest. Build. Together.</p>
           <p className="text-gold-300/80 max-w-lg md:mx-0 mx-auto leading-relaxed font-light">
             Alpha Access Exchange is Africa&apos;s financial operating system — connecting people, traders, and institutions through a united, borderless economic network.
           </p>
 
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
             <motion.button
               onClick={handleEnter}
@@ -113,25 +100,28 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Africa Map Image */}
+        {/* Right: Glowing Africa Globe */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
           className="md:w-1/2 w-full flex justify-center md:justify-end mt-12 md:mt-0 relative"
         >
-          <Image
-            src="/africa-map.png"
-            alt="Africa Digital Map"
-            width={450}
-            height={450}
-            priority
-            className="opacity-75"
-          />
+          <div className="relative">
+            <Image
+              src="/africa-globe.png"
+              alt="Africa Globe"
+              width={450}
+              height={450}
+              priority
+              className="opacity-90"
+            />
+            <div className="absolute inset-0 rounded-full bg-gold-400/10 blur-2xl"></div>
+          </div>
         </motion.div>
       </div>
 
-      {/* Core Philosophy Section */}
+      {/* --- CORE PHILOSOPHY SECTION --- */}
       <div className="bg-black py-16 px-6 relative z-10 w-full">
         <motion.div
           initial={{ opacity: 0 }}
@@ -147,7 +137,7 @@ export default function Home() {
           </p>
         </motion.div>
 
-        {/* Pillars Grid */}
+        {/* Pillars */}
         <div className="flex flex-wrap justify-center space-y-8 md:space-y-0 md:space-x-10 max-w-5xl mx-auto">
           {PillarsData.map((pillar, index) => (
             <motion.div
@@ -164,16 +154,14 @@ export default function Home() {
                 height={60}
                 className="object-contain"
               />
-              <h3 className="text-xl font-bold text-gold-400 tracking-wider mt-4">
-                {pillar.title}
-              </h3>
+              <h3 className="text-xl font-bold text-gold-400 tracking-wider mt-4">{pillar.title}</h3>
               <p className="text-gold-300/80 text-sm">{pillar.detail}</p>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Network & Footer CTA */}
+      {/* --- NETWORK SECTION --- */}
       <div className="py-16 px-6 relative z-10 w-full bg-slate">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left space-y-12 md:space-y-0">
           <motion.div
@@ -196,11 +184,12 @@ export default function Home() {
             </button>
           </motion.div>
 
+          {/* Flat Africa silhouette */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 0.4, scale: 1 }}
             transition={{ duration: 1 }}
-            className="md:w-2/5 flex justify-center relative opacity-40"
+            className="md:w-2/5 flex justify-center relative opacity-60"
           >
             <Image
               src="/africa-map.png"
@@ -213,7 +202,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Final CTA Shield Section */}
+      {/* --- FINAL CTA SHIELD SECTION --- */}
       <div className="bg-black py-20 px-6 relative z-10 w-full border-t border-gold-900">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -249,8 +238,6 @@ export default function Home() {
           </div>
         </motion.div>
       </div>
-
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
     </div>
   );
 }
