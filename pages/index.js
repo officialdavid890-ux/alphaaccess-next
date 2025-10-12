@@ -139,7 +139,7 @@ export default function Home() {
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
             className="text-center max-w-4xl mx-auto mb-12 space-y-4"
         >
             <h2 className="text-4xl font-extrabold text-white">
@@ -157,7 +157,7 @@ export default function Home() {
                     key={index}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 1.2 + index * 0.15 }}
+                    transition={{ duration: 0.6, delay: 0.8 + index * 0.15 }}
                     className="flex flex-col items-center text-center md:w-1/4 w-full px-4 space-y-3"
                 >
                     {/* Pillar Icon/Image */}
