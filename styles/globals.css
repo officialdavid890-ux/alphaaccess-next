@@ -1,32 +1,37 @@
-/* Fix: Replaced obsolete @import "tailwindcss/base" directives with the modern, single @import "tailwindcss", which fixes the "Package path ./base is not exported" error. */
+/* styles/global.css */
 
-@import "tailwindcss"; 
+/* Google font (Orbitron) import — ensures the futuristic look */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 
-/* Import custom font from Google Fonts (Orbitron) */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  /* Use the Orbitron font */
-  font-family: 'Orbitron', sans-serif; 
-  /* Set base dark theme */
-  background-color: #000;
-  color: #f0f0f0;
-  min-height: 100vh;
+/* base */
+:root {
+  --gold-400: #FFD700;
+  --gold-300: #FFE180;
+  --text-cream: #F7EED4;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+html, body, #__next {
+  height: 100%;
+  background: #000;
+  color: #fff;
+  font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-* {
-  box-sizing: border-box;
+/* tweak small utilities used in layout */
+.bg-slate { background-color: #0f0f0f; }
+.text-gold-400 { color: var(--gold-400); }
+.text-gold-300 { color: var(--gold-300); }
+
+/* maintain consistent button radius/shadow for golds */
+button {
+  letter-spacing: 0.6px;
 }
 
-/* Ensure global CSS for framer-motion is minimal and correct */
-.fade-in {
-  opacity: 1;
+/* small responsive adjustments */
+@media (min-width: 768px) {
+  .leading-tight { line-height: 1.02; }
 }
