@@ -1,70 +1,38 @@
-/* Import Orbitron font for that futuristic luxury vibe */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Root color variables for global use */
-:root {
-  --gold-50: #FFFBEA;
-  --gold-200: #FFF0B3;
-  --gold-300: #FFE180;
-  --gold-400: #FFD700;
-  --gold-600: #D4AF37;
-  --gold-900: #4D3D10;
-  --black: #000000;
-  --dark: #0B0B0B;
-  --slate: #1A1A1A;
-  --cream: #F7EED4;
-}
-
-/* Global layout + type */
-html, body, #__next {
-  height: 100%;
-  background-color: var(--black);
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
   color: #fff;
-  font-family: 'Orbitron', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  scroll-behavior: smooth;
+  font-family: "Orbitron", sans-serif;
 }
 
-/* Utility: background */
-.bg-slate { background-color: var(--slate); }
+.text-gold-400 {
+  color: #FFD700;
+}
 
-/* Text color utilities */
-.text-gold-400 { color: var(--gold-400); }
-.text-gold-300 { color: var(--gold-300); }
-.text-gold-700 { color: var(--gold-600); }
+.text-gold-300 {
+  color: #FFE180;
+}
 
-/* Button global style */
+.border-gold-900 {
+  border-color: #4D3D10;
+}
+
+.bg-gold-400 {
+  background-color: #FFD700;
+}
+
+.bg-gold-300 {
+  background-color: #FFE180;
+}
+
 button {
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
-  font-family: 'Orbitron', sans-serif;
-}
-
-/* Gold Glow hover effects */
-button:hover {
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-}
-
-/* Slight global glow for hero section elements */
-h1, h2, h3 {
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.05);
-}
-
-/* Add cinematic fade on load */
-.fade-in {
-  animation: fadeIn 1.5s ease-in-out forwards;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsiveness tweaks */
-@media (max-width: 768px) {
-  h1 { font-size: 2.2rem; line-height: 1.1; }
-  h2 { font-size: 1.5rem; }
+  transition: all 0.3s ease-in-out;
+  letter-spacing: 0.6px;
 }
