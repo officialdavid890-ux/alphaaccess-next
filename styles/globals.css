@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* --- Base reset and sane defaults --- */
+/* Fonts (Google). You can move these to _document or a Head component if preferred */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
 *,
 *::before,
 *::after { box-sizing: border-box; }
@@ -15,11 +17,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Kill any global debug borders from previous experiments */
+/* Nuke any debug borders left in older CSS */
 * { border-color: transparent; }
 
-/* Links */
 a { @apply underline-offset-2 hover:underline; }
-
-/* Headings default */
 h1, h2, h3 { @apply font-display; }
