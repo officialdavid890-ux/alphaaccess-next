@@ -1,172 +1,127 @@
+import Image from "next/image";
 import Link from "next/link";
 
-/**
- * Drop this file in pages/index.jsx (or app/page.jsx) in a Next.js + Tailwind project.
- * Fixes the runtime error caused by an improperly escaped inline SVG data-URL.
- *
- * Key changes:
- * - Replaced the backgroundImage string with a properly escaped template literal
- *   (quotes normalized, # encoded as %23) to avoid "Cannot read properties of null".
- * - Left layout/visuals the same.
- */
+const HERO = { src: "/africa-globe.png", width: 1040, height: 1040 }; // renders ~520
+const MAP  = { src: "/africa-map.png",   width: 720,  height: 720  }; // renders ~360
+const ICONS = {
+  brain: { src: "/brain.png",     width: 120, height: 120 },
+  hourglass: { src: "/hourglass.png", width: 120, height: 120 },
+  box: { src: "/box.png",         width: 120, height: 120 },
+  shield: { src: "/shield.png",   width: 120, height: 120 }
+};
 
-export default function Landing() {
+export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-yellow-400/30">
-      {/* Global vignette + subtle stars */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        {/* vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_-10%,rgba(255,204,0,0.12),transparent_70%)]" />
-        {/* noise */}
-        <div
-          className="absolute inset-0 opacity-[0.04] mix-blend-soft-light"
-          style={{
-            backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"160\" height=\"160\" viewBox=\"0 0 160 160\"><filter id=\"n\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.8\" numOctaves=\"2\" stitchTiles=\"stitch\"/></filter><rect width=\"100%\" height=\"100%\" filter=\"url(%23n)\" opacity=\"0.4\"/></svg>")`,
-            backgroundRepeat: "repeat",
-          }}
-        />
-      </div>
-
+    <>
       {/* ===== HERO ===== */}
-      <section className="relative max-w-7xl mx-auto px-6 md:px-10 pt-24 md:pt-28 pb-14 md:pb-20 grid md:grid-cols-2 gap-10 items-center">
-        {/* Left: copy */}
-        <div>
-          <h1 className="text-[44px] leading-[1.02] md:text-[72px] md:leading-[1.02] font-extrabold tracking-tight">
+      <section className="relative mx-auto grid max-w-wrap items-center gap-10 px-6 pb-14 md:grid-cols-2 md:px-6">
+        <div className="pt-4 md:pt-0">
+          <h1 className="text-[clamp(44px,6vw,72px)] leading-[1.02] font-extrabold tracking-tight">
             UNCHAIN THE <br className="hidden md:block" /> CONTINENT.
           </h1>
-          <p className="mt-4 text-[18px] font-semibold text-yellow-400">
+          <p className="mt-4 text-[18px] font-semibold text-brand-400">
             Bank. Invest. Build. Together.
           </p>
-          <p className="mt-4 max-w-md text-yellow-200/80 leading-relaxed">
+          <p className="mt-4 max-w-md text-brand-100/85 leading-relaxed">
             Alpha Access Exchange is Africa’s financial operating system—connecting
             people, traders, and institutions through a unified, borderless economic
             network.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-4">
-            <Link
-              href="/signup"
-              className="inline-flex items-center justify-center rounded-md bg-yellow-400 px-5 py-3 font-semibold text-black shadow-[0_0_35px_rgba(234,179,8,0.28)] transition hover:bg-yellow-300"
-            >
+            <Link href="/signup" className="inline-flex items-center justify-center rounded-md bg-brand-400 px-5 py-3 font-semibold text-black shadow-[0_0_35px_rgba(234,179,8,0.28)] transition hover:bg-brand-300 no-underline">
               ENTER THE XCHANGE
             </Link>
-            <Link
-              href="/how-it-works"
-              className="inline-flex items-center justify-center rounded-md border border-yellow-400 px-5 py-3 font-semibold text-yellow-400 transition hover:bg-yellow-500/10"
-            >
+            <Link href="/how-it-works" className="inline-flex items-center justify-center rounded-md border border-brand-400 px-5 py-3 font-semibold text-brand-400 transition hover:bg-brand-400/10 no-underline">
               LEARN HOW IT WORKS
             </Link>
           </div>
         </div>
 
-        {/* Right: Africa sphere with glow (vector placeholder) */}
-        <div className="relative mx-auto md:mx-0 w-[360px] md:w-[520px] aspect-square">
+        <div className="relative mx-auto w-[min(520px,80vw)] aspect-square md:mx-0">
           <div className="absolute -inset-8 rounded-full blur-2xl bg-[radial-gradient(circle,rgba(234,179,8,0.22),transparent_60%)]" />
-          <svg viewBox="0 0 520 520" className="relative h-full w-full">
-            <defs>
-              <radialGradient id="g" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#fde68a" />
-                <stop offset="60%" stopColor="#facc15" stopOpacity="0.65" />
-                <stop offset="100%" stopColor="#facc15" stopOpacity="0.1" />
-              </radialGradient>
-            </defs>
-            <circle
-              cx="260"
-              cy="260"
-              r="220"
-              fill="url(#g)"
-              fillOpacity="0.35"
-              stroke="#facc15"
-              strokeOpacity="0.18"
-            />
-            <path
-              d="M300 110c-30 6-60 24-76 46-8 11-22 17-34 22-9 4-17 9-22 17-7 11-3 25 7 32 7 5 17 9 17 19 0 14-18 20-20 33-1 8 7 13 13 18 8 7 14 18 10 28-4 10-16 16-17 27-1 9 7 17 15 22 12 8 28 13 41 7 13-6 15-24 28-29 9-3 18 2 27 2 15 0 29-9 37-22 8-13 9-29 3-43-4-9-11-17-12-26-2-15 12-28 26-31 12-2 24 2 36 0 10-1 20-6 26-15 8-10 8-24 4-36-6-15-20-24-34-31-17-8-36-17-55-13z"
-              fill="#fde68a"
-              fillOpacity="0.85"
-            />
-          </svg>
+          <Image
+            src={HERO.src}
+            alt="Glowing Africa sphere"
+            width={HERO.width}
+            height={HERO.height}
+            className="relative h-full w-full object-contain"
+            priority
+            sizes="(min-width: 980px) 520px, 80vw"
+          />
         </div>
       </section>
 
-      {/* ===== CLAIM ===== */}
-      <section className="px-6 md:px-10 text-center">
-        <h2 className="text-[30px] md:text-[40px] font-extrabold leading-tight">
-          They built the circus. <span className="text-yellow-400">We built the exit.</span>
+      {/* ===== TAGLINE & PILLARS ===== */}
+      <section className="px-6 text-center">
+        <h2 className="text-[clamp(30px,4.5vw,40px)] font-extrabold leading-tight">
+          They built the circus. <span className="text-brand-400">We built the exit.</span>
         </h2>
-        <p className="mt-3 max-w-4xl mx-auto text-yellow-200/85 leading-relaxed">
+        <p className="mx-auto mt-3 max-w-text leading-relaxed text-brand-100/85">
           We’re redefining value for a connected Africa — where digital finance, investment, and innovation converge. Alpha Access empowers users to hold, trade, earn, and invest — all within one sovereign ecosystem.
         </p>
 
-        {/* Feature trio */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+        <div className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-10 md:grid-cols-3">
           {[
-            { title: "SMART FINANCE", text: "Your AI powered wallet for instant payments, yield." },
-            { title: "TIME AS WEALTH", text: "Access yield opportunities that grow while you rest." },
-            { title: "OPEN VAULT", text: "Trade, invest, and manage your assets securely." },
+            { title: "SMART FINANCE", text: "Your AI powered wallet for instant payments, yield.", icon: ICONS.brain },
+            { title: "TIME AS WEALTH", text: "Access yield opportunities that grow while you rest.", icon: ICONS.hourglass },
+            { title: "OPEN VAULT", text: "Trade, invest, and manage your assets securely.", icon: ICONS.box }
           ].map((f, i) => (
             <div key={i} className="flex flex-col items-center">
-              <div className="mb-3 h-14 w-14 rounded-xl border border-yellow-400/60 grid place-items-center shadow-[0_0_30px_rgba(250,204,21,0.15)]">
-                <div className="h-6 w-6 bg-yellow-300/90 rounded" />
+              <div className="mb-3 grid h-14 w-14 place-items-center rounded-xl border border-brand-400/60 shadow-[0_0_30px_rgba(250,204,21,0.15)]">
+                <Image src={f.icon.src} alt="" width={f.icon.width} height={f.icon.height} className="h-6 w-6 object-contain" />
               </div>
-              <h3 className="text-yellow-400 font-bold tracking-wide">{f.title}</h3>
-              <p className="mt-2 text-sm text-yellow-200/75 max-w-[260px]">{f.text}</p>
+              <h3 className="font-bold tracking-wide text-brand-400">{f.title}</h3>
+              <p className="mt-2 max-w-[260px] text-sm text-brand-100/75">{f.text}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ===== NETWORK ===== */}
-      <section className="relative mt-14 md:mt-20 border-t border-yellow-500/10">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 py-14 md:py-20 grid md:grid-cols-2 gap-10 items-center">
+      {/* ===== NETWORK SECTION ===== */}
+      <section className="relative mt-14 border-t border-white/10 md:mt-20">
+        <div className="mx-auto grid max-w-wrap items-center gap-10 px-6 py-14 md:grid-cols-2">
           <div>
-            <h3 className="text-[28px] md:text-[38px] font-extrabold leading-tight">
-              A network built for everyone —<br className="hidden md:block" />
-              from Lagos to Nairobi, Accra to Cairo.
+            <h3 className="text-[clamp(28px,4.8vw,38px)] font-extrabold leading-tight">
+              A network built for everyone —<br className="hidden md:block" /> from Lagos to Nairobi, Accra to Cairo.
             </h3>
-            <p className="mt-4 text-yellow-200/85 max-w-xl">
+            <p className="mt-4 max-w-xl text-brand-100/85">
               Trade, send, and invest seamlessly, regardless of borders or currencies.
             </p>
-            <Link
-              href="/ecosystem"
-              className="mt-8 inline-block rounded-md border border-yellow-400 px-5 py-3 font-semibold text-yellow-400 transition hover:bg-yellow-500/10"
-            >
+            <Link href="/ecosystem" className="mt-8 inline-block rounded-md border border-brand-400 px-5 py-3 font-semibold text-brand-400 transition hover:bg-brand-400/10 no-underline">
               EXPLORE THE ECOSYSTEM
             </Link>
           </div>
-          <div className="relative mx-auto md:mx-0 w-[300px] md:w-[360px] aspect-square">
+
+          <div className="relative mx-auto w-[min(360px,70vw)] aspect-square md:mx-0">
             <div className="absolute -inset-8 rounded-full blur-2xl bg-[radial-gradient(circle,rgba(250,204,21,0.2),transparent_60%)]" />
-            <svg viewBox="0 0 360 360" className="relative h-full w-full">
-              <circle cx="180" cy="180" r="150" fill="none" stroke="#facc15" strokeOpacity="0.25" />
-              <path
-                d="M210 65c-26 6-48 21-65 40-9 10-26 15-35 27-6 8-3 20 6 26 7 5 14 8 14 16 0 10-13 15-14 24-1 6 5 11 10 15 7 6 12 15 8 23-3 8-13 13-14 21-1 7 6 14 12 18 10 7 22 11 33 6 10-5 12-20 22-24 7-3 15 1 22 1 12 0 23-7 29-18s6-24 2-36c-3-7-8-14-9-21-1-12 10-23 21-25 10-2 20 2 29 0 8-1 16-5 21-12 6-8 6-20 3-29-5-12-16-20-28-25-14-6-30-13-46-10z"
-                fill="#fde68a"
-                fillOpacity="0.8"
-              />
-            </svg>
+            <Image
+              src={MAP.src}
+              alt="Stylized Africa map"
+              width={MAP.width}
+              height={MAP.height}
+              className="relative h-full w-full object-contain"
+              sizes="(min-width: 980px) 360px, 70vw"
+            />
           </div>
         </div>
       </section>
 
       {/* ===== FINAL CTA ===== */}
-      <section className="border-t border-yellow-500/10">
-        <div className="max-w-5xl mx-auto px-6 md:px-10 py-16 md:py-20 text-center">
-          <h2 className="text-[28px] md:text-[38px] font-extrabold">
+      <section className="border-t border-white/10">
+        <div className="mx-auto max-w-5xl px-6 py-16 text-center md:py-20">
+          <h2 className="text-[clamp(28px,4.8vw,38px)] font-extrabold">
             The Future of African Finance is Ours to Build.
           </h2>
-          <p className="mt-3 text-yellow-200/85">
-            Thousands already building sovereignty through Alpha Access.
-          </p>
+          <p className="mt-3 text-brand-100/85">Thousands already building sovereignty through Alpha Access.</p>
           <div className="mt-8 flex items-center justify-center gap-4">
-            <div className="h-14 w-14 rounded-full border border-yellow-400/60 shadow-[0_0_24px_rgba(250,204,21,0.18)]" />
-            <Link
-              href="/signup"
-              className="rounded-md bg-yellow-400 px-6 py-3 font-semibold text-black shadow-[0_0_24px_rgba(250,204,21,0.25)] transition hover:bg-yellow-300"
-            >
+            <Image src={ICONS.shield.src} alt="" width={ICONS.shield.width} height={ICONS.shield.height} className="h-14 w-14 rounded-full object-contain" />
+            <Link href="/signup" className="rounded-md bg-brand-400 px-6 py-3 font-semibold text-black shadow-[0_0_24px_rgba(250,204,21,0.25)] transition hover:bg-brand-300 no-underline">
               CREATE YOUR ACCOUNT
             </Link>
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 }
