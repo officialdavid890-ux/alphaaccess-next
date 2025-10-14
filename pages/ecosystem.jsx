@@ -1,12 +1,15 @@
 export default function Ecosystem() {
   return (
-    <main className="min-h-screen grid place-items-center bg-black text-white">
-      <div className="max-w-2xl text-center px-6">
-        <h1 className="text-3xl font-bold">Explore the ecosystem</h1>
-        <p className="text-yellow-200/80 mt-3">
-          Map of partners, cross-border rails, and apps — coming soon.
-        </p>
+    <div className="mx-auto max-w-wrap px-6">
+      <h1 className="text-[clamp(32px,5.2vw,56px)] font-display font-extrabold tracking-tight">
+        Explore the Ecosystem
+      </h1>
+      <p className="mt-3 max-w-text text-brand-100/85">
+        Partners, payment rails, FX corridors, and community apps will be showcased here.
+      </p>
+      <div className="mt-10 rounded-2xl border border-white/10 bg-black/40 p-8 text-white/80">
+        Coming soon.
       </div>
-    </main>
+    </div>
   );
 }
