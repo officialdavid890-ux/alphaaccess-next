@@ -1,38 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background-color: #000;
-  color: #fff;
-  font-family: "Orbitron", sans-serif;
+/* --- Base reset and sane defaults --- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body, #__next { height: 100%; }
+
+body {
+  @apply bg-black text-white font-sans antialiased;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.text-gold-400 {
-  color: #FFD700;
-}
+/* Kill any global debug borders from previous experiments */
+* { border-color: transparent; }
 
-.text-gold-300 {
-  color: #FFE180;
-}
+/* Links */
+a { @apply underline-offset-2 hover:underline; }
 
-.border-gold-900 {
-  border-color: #4D3D10;
-}
-
-.bg-gold-400 {
-  background-color: #FFD700;
-}
-
-.bg-gold-300 {
-  background-color: #FFE180;
-}
-
-button {
-  transition: all 0.3s ease-in-out;
-  letter-spacing: 0.6px;
-}
+/* Headings default */
+h1, h2, h3 { @apply font-display; }
